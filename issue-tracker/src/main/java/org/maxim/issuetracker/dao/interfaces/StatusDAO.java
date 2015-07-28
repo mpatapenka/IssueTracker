@@ -4,16 +4,13 @@ import org.maxim.issuetracker.domain.Status;
 
 import java.util.List;
 
-/**
- * Created by Maxim on 23.07.2015.
- */
 public interface StatusDAO {
 
-    void add(Status status);
+    void save(Status status);
 
-    void remove(long id);
+    void delete(int id);
 
-    Status get(long id);
+    Status findById(int id);
 
     List<Status> list();
 

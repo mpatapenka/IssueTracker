@@ -4,16 +4,13 @@ import org.maxim.issuetracker.domain.Position;
 
 import java.util.List;
 
-/**
- * Created by Maxim on 23.07.2015.
- */
 public interface PositionDAO {
 
-    void add(Position role);
+    void save(Position position);
 
-    void remove(long id);
+    void delete(int id);
 
-    Position get(long id);
+    Position findById(int id);
 
     List<Position> list();
 
