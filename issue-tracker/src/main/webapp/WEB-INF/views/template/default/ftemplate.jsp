@@ -3,24 +3,17 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
 <!DOCTYPE html>
-
-<html>
+<html class="height-fix">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
     <title><spring:message code="app.name"/></title>
-
-    <link rel="stylesheet" href="">
-    <link rel="stylesheet" href="">
+    <link href="<spring:url value='/resources/core/css/styles.css'/>" rel="stylesheet" type="text/css">
 </head>
 
-<body>
-    <tiles:insertAttribute name="header"/>
-    <div class="container">
+<body class="height-fix">
+    <div class="main">
         <tiles:insertAttribute name="content"/>
     </div>
     <tiles:insertAttribute name="footer"/>
-
-    <script src=""></script>
-    <script src=""></script>
 </body>
 </html>
