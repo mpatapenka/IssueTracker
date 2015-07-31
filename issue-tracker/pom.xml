@@ -11,6 +11,7 @@
     <properties>
         <jdk.version>1.8</jdk.version>
         <spring.version>4.1.7.RELEASE</spring.version>
+        <tiles.version>3.0.5</tiles.version>
     </properties>
 
     <dependencies>
@@ -121,8 +122,8 @@
         <!-- Tiles -->
         <dependency>
             <groupId>org.apache.tiles</groupId>
-            <artifactId>tiles-jsp</artifactId>
-            <version>3.0.5</version>
+            <artifactId>tiles-extras</artifactId>
+            <version>${tiles.version}</version>
         </dependency>
 
         <dependency>
