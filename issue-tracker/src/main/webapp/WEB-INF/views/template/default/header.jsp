@@ -1,16 +1,15 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Maxim
-  Date: 28.07.2015
-  Time: 1:46:47
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
 
-</body>
-</html>
+<div class="header">
+    <ul class="nav">
+        <li>
+            <a href="#" class="nav-link">Dashboard</a>
+        </li>
+        <li class="nav-dropdown">
+            Projects
+        </li>
+        <li class="nav-dropdown">Issues</li>
+        <li class="button nav-button"><a href="#" class="nav-link">Create Issue</a></li>
+        <li class="account-button nav-dropdown"><a href="#" class="nav-link">Maksim Patapenka</a></li>
+    </ul>
+</div>
