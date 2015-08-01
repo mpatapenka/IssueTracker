@@ -5,12 +5,12 @@
 
 <tiles-definitions>
 
-    <definition name="hftemplate" template="/WEB-INF/views/template/default/hftemplate.jsp">
+    <definition name="hftemplate" template="/WEB-INF/views/template/default/header_footer_template.jsp">
         <put-attribute name="header" value="/WEB-INF/views/template/default/header.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/views/template/default/footer.jsp"/>
     </definition>
 
-    <definition name="ftemplate" template="/WEB-INF/views/template/default/ftemplate.jsp">
+    <definition name="ftemplate" template="/WEB-INF/views/template/default/footer_template.jsp">
         <put-attribute name="footer" value="/WEB-INF/views/template/default/footer.jsp"/>
     </definition>
 
