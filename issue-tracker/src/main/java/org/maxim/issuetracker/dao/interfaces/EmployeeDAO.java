@@ -12,6 +12,8 @@ public interface EmployeeDAO {
 
     Employee findById(int id);
 
+    Employee findByLogin(String login);
+
     List<Employee> list();
 
 }
