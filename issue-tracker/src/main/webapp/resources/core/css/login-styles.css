@@ -3,6 +3,10 @@ html, body {
     min-width: 300px;
 }
 
+.main {
+    height: 100%;
+}
+
 .align-wrapper {
     display: flex;
     width: 50%;
@@ -54,9 +58,9 @@ html, body {
 }
 
 .login-panel-footer {
-    height: 40px;
+    height: 60px;
     font-size: 14px;
-    line-height: 40px;
+    line-height: 30px;
     color: #707070;
     text-align: center;
 }
@@ -76,7 +80,15 @@ html, body {
     font-size: 14px;
     line-height: 30px;
     padding: 4px 30px 4px 10px;
-    border-color: #BF5B5B;
     background: #FFFFFF;
+}
+
+.alert-danger-fix {
+    border-color: #BF5B5B;
     color: #BF5B5B;
+}
+
+.alert-success-fix {
+    border-color: #7BDA53;
+    color: #71AE57;
 }

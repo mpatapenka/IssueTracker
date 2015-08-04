@@ -3,13 +3,13 @@ html, body {
     min-width: 550px;
     font-family: Arial, sans-serif;
     background: #F5F5F5;
+    height: 100%;
 }
 
 .main {
     min-height: 100%;
     box-sizing: border-box;
     padding-bottom: 40px;
-    height: 100%;
 }
 
 .header {
@@ -17,7 +17,7 @@ html, body {
     height: 41px;
 }
 
-.nav {
+.navigation {
     padding: 0 40px;
     margin: 0;
     height: 100%;
@@ -26,7 +26,7 @@ html, body {
     color: #fff;
 }
 
-.nav li {
+.navigation .menu-item {
     display: inline-block;
     list-style: none;
     padding: 0 10px;
@@ -34,18 +34,14 @@ html, body {
     box-sizing: border-box;
 }
 
-.nav li:hover {
+.navigation .menu-item:hover {
     background: #296CA3;
 }
 
-.nav-dropdown {
-
-}
-
-.nav-dropdown:after {
-    font-size: 10px;
-    line-height: 10px;
-    content: " ▼ ";
+.navigation a {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 .nav-link {
@@ -55,14 +51,27 @@ html, body {
     padding: 0;
 }
 
+.nav-link:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav-link:visited {
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav-link:focus {
+    text-decoration: none;
+    color: #fff;
+}
+
 .account-button {
     float: right;
 }
 
 .content {
-    border-color: #ddd;
-    border-style: solid;
-    border-width: 0;
+    border: 0 solid #ddd;
     border-bottom-width: 1px;
     background: #FFFFFF;
 }
@@ -161,81 +170,4 @@ html, body {
 
 .footer a:hover {
     text-decoration: underline;
-}
-
-.align-wrapper {
-    display: flex;
-    min-height: 500px;
-    width: 50%;
-    margin: 0 auto;
-    height: 100%;
-    max-width: 400px;
-    min-width: 300px;
-}
-
-.login-panel {
-    box-sizing: border-box;
-    padding: 5px;
-    width: 100%;
-    border-color: #ddd;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 7px;
-    background: #FFFFFF;
-    margin: auto 0;
-}
-
-.text-field {
-    border-radius: 4px;
-    padding: 4px 10px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    width: 100%;
-    vertical-align: baseline;
-    font-size: 14px;
-    height: 40px;
-    margin: 5px 0;
-}
-
-.login-button {
-    font-size: 16px;
-    padding: 4px 20px;
-    background: #3572b0;
-    border-color: transparent;
-    color: #fff;
-    border-radius: 3px;
-    margin: 5px 0;
-    cursor: pointer;
-    width: 100%;
-    height: 40px;
-}
-
-.login-panel-header {
-    height: 50px;
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 50px;
-    color: #707070;
-    text-align: center;
-}
-
-.login-panel-footer {
-    height: 40px;
-    font-size: 14px;
-    line-height: 40px;
-    color: #707070;
-    text-align: center;
-}
-
-.login-panel-footer a {
-    color: #3572b0;
-    text-decoration: none;
-}
-
-.login-panel-footer a:hover {
-    text-decoration: underline;
-}
-
-.height-fix {
-    height: 100%;
 }
