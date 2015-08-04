@@ -1,19 +1,46 @@
 package org.maxim.issuetracker.controllers;
 
+import org.maxim.issuetracker.domain.Employee;
+import org.maxim.issuetracker.service.interfaces.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Map;
-
-/**
- * Created by Maxim on 27.07.2015.
- */
 @Controller
 public class IndexController {
 
-    @RequestMapping({"/", "/start"})
-    public String showStartPage(Map<String, Object> model) {
+    @Autowired
+    private EmployeeService employeeService;
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String start() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Employee user = employeeService.findByLogin(username);
+        if (user != null) {
+            return "redirect:/user/dashboard";
+        }
+        return "dashboard";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String showLoginPage(@RequestParam(required = false) String error,
+                                @RequestParam(required = false) String logout, Model model) {
+        if (error != null) {
+            model.addAttribute("errorMessage", "Username or password is incorrect.");
+        }
+        if (logout != null) {
+            model.addAttribute("logoutMessage", "Logout successful.");
+        }
         return "login";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String showRegisterPage() {
+        return "register";
     }
 
 }
