@@ -12,11 +12,19 @@
                 </div>
                 <form action="<c:url value='/j_spring_security_check'/>" method="post">
                     <c:if test="${errorMessage != null}">
-                        <div class="alert alert-danger alert-dismissible alert-fix" role="alert">
+                        <div class="alert alert-danger alert-dismissible alert-fix alert-danger-fix" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                                 ${errorMessage}
+                        </div>
+                    </c:if>
+                    <c:if test="${logoutMessage != null}">
+                        <div class="alert alert-success alert-dismissible alert-fix alert-success-fix" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                                ${logoutMessage}
                         </div>
                     </c:if>
                     <input type="text" class="text-field" name="username" placeholder="Username">
@@ -24,7 +32,8 @@
                     <input type="submit" class="login-button" value="Log in">
                 </form>
                 <div class="login-panel-footer">
-                    Need an account? <a href="/register">Sign up</a>.
+                    Need an account? <a href="/register">Sign up</a>.<br>
+                    Back to start page? <a href="/">Dashboard</a>.
                 </div>
             </div>
         </div>
