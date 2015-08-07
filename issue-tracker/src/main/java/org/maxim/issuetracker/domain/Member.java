@@ -1,16 +1,19 @@
 package org.maxim.issuetracker.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "member")
-public class Member {
+public class Member implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,26 +23,31 @@ public class Member {
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "projectid", nullable = false)
+    @JsonBackReference
     private Project project;
 
     @NotNull(message = "Member employee" + Constants.NULL_ERROR_MSG_SUFFIX)
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "employeeid", nullable = false)
+    @JsonBackReference
     private Employee employee;
 
     @NotNull(message = "Member role" + Constants.NULL_ERROR_MSG_SUFFIX)
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "roleid", nullable = false)
+    @JsonBackReference
     private Role role;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     @Cascade(CascadeType.ALL)
+    @JsonManagedReference
     private Set<Assigment> assigments = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     @Cascade(CascadeType.ALL)
+    @JsonManagedReference
     private Set<Activity> activities = new HashSet<>();
 
     public int getId() {

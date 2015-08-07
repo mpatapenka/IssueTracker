@@ -1,17 +1,20 @@
 package org.maxim.issuetracker.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "assigment")
-public class Assigment {
+public class Assigment implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +24,14 @@ public class Assigment {
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "memberid", nullable = false)
+    @JsonBackReference
     private Member member;
 
     @NotNull(message = "Assigment task" + Constants.NULL_ERROR_MSG_SUFFIX)
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "taskid", nullable = false)
+    @JsonBackReference
     private Task task;
 
     @Column(name = "description")
@@ -35,6 +40,7 @@ public class Assigment {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "assigment")
     @Cascade(CascadeType.ALL)
+    @JsonManagedReference
     private Set<Activity> activities = new HashSet<>();
 
     public int getId() {

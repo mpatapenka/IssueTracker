@@ -1,5 +1,6 @@
 package org.maxim.issuetracker.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -8,11 +9,12 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
 @Table(name = "activity")
-public class Activity {
+public class Activity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,12 +36,14 @@ public class Activity {
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "memberid", nullable = false)
+    @JsonBackReference
     private Member member;
 
     @NotNull(message = "Activity assigment" + Constants.NULL_ERROR_MSG_SUFFIX)
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "assigmentid", nullable = false)
+    @JsonBackReference
     private Assigment assigment;
 
     public int getId() {

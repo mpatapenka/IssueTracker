@@ -1,18 +1,21 @@
 package org.maxim.issuetracker.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "task")
-public class Task {
+public class Task implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +25,7 @@ public class Task {
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "projectid", nullable = false)
+    @JsonBackReference
     private Project project;
 
     @Column(name = "description")
@@ -44,14 +48,17 @@ public class Task {
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "statusid", nullable = false)
+    @JsonBackReference
     private Status status;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "task")
     @Cascade(CascadeType.ALL)
+    @JsonManagedReference
     private Set<Attachment> attachments = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "task")
     @Cascade(CascadeType.ALL)
+    @JsonManagedReference
     private Set<Assigment> assigments = new HashSet<>();
 
     public int getId() {

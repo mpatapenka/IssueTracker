@@ -1,15 +1,17 @@
 package org.maxim.issuetracker.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "attachment")
-public class Attachment {
+public class Attachment implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,12 +33,14 @@ public class Attachment {
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "projectid", nullable = false)
+    @JsonBackReference
     private Project project;
 
     @NotNull(message = "Attachment task" + Constants.NULL_ERROR_MSG_SUFFIX)
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "taskid", nullable = false)
+    @JsonBackReference
     private Task task;
 
     public int getId() {

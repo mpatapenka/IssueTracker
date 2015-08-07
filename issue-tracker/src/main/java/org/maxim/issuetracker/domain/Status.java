@@ -1,16 +1,18 @@
 package org.maxim.issuetracker.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "status")
-public class Status {
+public class Status implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +24,7 @@ public class Status {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "status")
     @Cascade(CascadeType.ALL)
+    @JsonManagedReference
     private Set<Task> tasks = new HashSet<>();
 
     public int getId() {
