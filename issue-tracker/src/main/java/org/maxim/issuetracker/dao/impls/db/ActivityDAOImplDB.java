@@ -5,12 +5,14 @@ import org.maxim.issuetracker.dao.interfaces.ActivityDAO;
 import org.maxim.issuetracker.domain.Activity;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class ActivityDAOImplDB extends AbstractDAOHelperDB implements ActivityDAO {
 
-    public ActivityDAOImplDB() { }
+    public ActivityDAOImplDB() {
+    }
 
     public ActivityDAOImplDB(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -37,6 +39,22 @@ public class ActivityDAOImplDB extends AbstractDAOHelperDB implements ActivityDA
     @Override
     public List<Activity> list() {
         return currentSession().createQuery("from Activity").list();
+    }
+
+    @Override
+    public List<Activity> listLast(int offset) {
+        final int defaultBundleSize = 5;
+        int startPos = defaultBundleSize * offset;
+        int endPos = startPos + defaultBundleSize;
+
+        List<Activity> activities = currentSession().createQuery("from Activity order by date desc").list();
+        if (endPos > activities.size()) {
+            endPos = activities.size();
+        }
+        if (startPos >= endPos) {
+            return new ArrayList<>();
+        }
+        return activities.subList(startPos, endPos);
     }
 
 }

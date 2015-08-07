@@ -14,4 +14,6 @@ public interface ActivityDAO {
 
     List<Activity> list();
 
+    List<Activity> listLast(int offset);
+
 }
