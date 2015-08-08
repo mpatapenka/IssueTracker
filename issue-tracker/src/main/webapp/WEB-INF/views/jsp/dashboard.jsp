@@ -17,6 +17,7 @@
                         <p>
                             <strong>Welcome to Issue Tracker</strong>
                         </p>
+
                         <p>
                             Please sign in.
                         </p>
@@ -30,15 +31,15 @@
                     <div class="panel-header">
                         Activity Stream
                     </div>
-                    <div class="panel-content">
-                        <c:forEach var="activity" items="${activities}">
-                            <p>
-                                <strong>${activity.member.employee.login}</strong>
-                                ${activity.date}
-                                ${activity.comment}
-                            </p>
+                    <div class="panel-content activity-panel">
+                        <c:forEach var="activity" items="${lastActivities}">
+                            <div class="activity-item">
+                                <strong>${activity.member.employee.firstName} ${activity.member.employee.lastName}</strong>
+                                    ${activity.comment}<br>
+                                    ${activity.date}
+                            </div>
                         </c:forEach>
-                        <a href="#" class="button">
+                        <a id="show-more-btn" href="/user/dashboard/activity" class="button show-more-btn">
                             <span class="btn-panel">Show more...</span>
                         </a>
                     </div>
@@ -48,7 +49,13 @@
                         Assigned to Me
                     </div>
                     <div class="panel-content">
-
+                        <c:forEach var="assign" items="${assignToMe}">
+                            <p>
+                                <strong>${assign.task.project.name}</strong>
+                                    ${assign.task.project.description}
+                                    ${assign.description}
+                            </p>
+                        </c:forEach>
                     </div>
                 </div>
             </div>

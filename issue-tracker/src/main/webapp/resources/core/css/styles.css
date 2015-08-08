@@ -171,3 +171,7 @@ html, body {
 .footer a:hover {
     text-decoration: underline;
 }
+
+.activity-item {
+    margin-bottom: 10px;
+}
