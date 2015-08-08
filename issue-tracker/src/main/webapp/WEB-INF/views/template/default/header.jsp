@@ -12,7 +12,7 @@
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
                    aria-expanded="false">Projects<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <c:forEach var="member" items="${projects}">
+                    <c:forEach var="member" items="${members}">
                         <li><a href="#">${member.project.name}</a></li>
                     </c:forEach>
                 </ul>
@@ -27,13 +27,12 @@
             <li class="button nav-button menu-item"><a href="#" class="nav-link">Create Issue</a></li>
             <li class="account-button dropdown menu-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
-                   aria-expanded="true">${userinfo}<span class="caret"></span></a>
+                   aria-expanded="true">${userFullName}<span class="caret"></span></a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="#">Profile</a></li>
                     <security:authorize access="hasRole('ROLE_ADMIN')">
                         <li><a href="#">Admin page</a></li>
+                        <li role="separator" class="divider"></li>
                     </security:authorize>
-                    <li role="separator" class="divider"></li>
                     <li><a href="/j_spring_security_logout">Log Out</a></li>
                 </ul>
             </li>
