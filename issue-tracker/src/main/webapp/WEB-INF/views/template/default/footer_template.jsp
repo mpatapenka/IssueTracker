@@ -21,5 +21,6 @@
 
     <script src="/resources/core/js/jquery-1.11.3.min.js"></script>
     <script src="/resources/core/js/bootstrap.min.js"></script>
+    <script src="/resources/core/js/scripts.js"></script>
 </body>
 </html>
