@@ -8,4 +8,6 @@ public interface ActivityService {
 
     List<Activity> list();
 
+    List<Activity> listLast(int offset);
+
 }

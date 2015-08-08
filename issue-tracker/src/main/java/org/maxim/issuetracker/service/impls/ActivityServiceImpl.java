@@ -31,4 +31,10 @@ public class ActivityServiceImpl implements ActivityService {
         return activityDAO.list();
     }
 
+    @Override
+    @Transactional
+    public List<Activity> listLast(int offset) {
+        return activityDAO.listLast(offset);
+    }
+
 }
