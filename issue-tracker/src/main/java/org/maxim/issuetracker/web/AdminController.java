@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class AdminController {
 
     @Secured(SecurityConstants.ROLE_ADMIN)
-    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    @RequestMapping(value = "/panel", method = RequestMethod.GET)
     public String showAdmin(Model model) {
-        return "dashboard";
+        return "adminpage";
     }
 
 }
