@@ -1,4 +1,4 @@
-package org.maxim.issuetracker.dao.interfaces;
+package org.maxim.issuetracker.dao;
 
 import org.maxim.issuetracker.domain.Employee;
 

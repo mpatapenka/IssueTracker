@@ -1,4 +1,4 @@
-package org.maxim.issuetracker.dao.impls.db;
+package org.maxim.issuetracker.dao.db;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

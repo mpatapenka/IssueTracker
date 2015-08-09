@@ -1,4 +1,4 @@
-package org.maxim.issuetracker.service.interfaces;
+package org.maxim.issuetracker.service;
 
 import org.maxim.issuetracker.domain.Activity;
 

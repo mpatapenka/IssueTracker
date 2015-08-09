@@ -1,7 +1,7 @@
-package org.maxim.issuetracker.dao.impls.db;
+package org.maxim.issuetracker.dao.db;
 
 import org.hibernate.SessionFactory;
-import org.maxim.issuetracker.dao.interfaces.AttachmentDAO;
+import org.maxim.issuetracker.dao.AttachmentDAO;
 import org.maxim.issuetracker.domain.Attachment;
 import org.springframework.stereotype.Repository;
 

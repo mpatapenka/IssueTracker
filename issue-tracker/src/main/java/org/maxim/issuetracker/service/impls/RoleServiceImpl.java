@@ -1,8 +1,8 @@
 package org.maxim.issuetracker.service.impls;
 
-import org.maxim.issuetracker.dao.interfaces.RoleDAO;
+import org.maxim.issuetracker.dao.RoleDAO;
 import org.maxim.issuetracker.domain.Role;
-import org.maxim.issuetracker.service.interfaces.RoleService;
+import org.maxim.issuetracker.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

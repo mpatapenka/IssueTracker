@@ -1,4 +1,4 @@
-package org.maxim.issuetracker.controllers;
+package org.maxim.issuetracker.web;
 
 import org.maxim.issuetracker.security.SecurityConstants;
 import org.springframework.security.access.annotation.Secured;

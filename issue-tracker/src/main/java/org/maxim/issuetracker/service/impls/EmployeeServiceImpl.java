@@ -1,8 +1,8 @@
 package org.maxim.issuetracker.service.impls;
 
-import org.maxim.issuetracker.dao.interfaces.EmployeeDAO;
+import org.maxim.issuetracker.dao.EmployeeDAO;
 import org.maxim.issuetracker.domain.Employee;
-import org.maxim.issuetracker.service.interfaces.EmployeeService;
+import org.maxim.issuetracker.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

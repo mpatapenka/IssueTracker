@@ -1,4 +1,4 @@
-package org.maxim.issuetracker.controllers;
+package org.maxim.issuetracker.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,8 +7,8 @@ import org.maxim.issuetracker.domain.Assigment;
 import org.maxim.issuetracker.domain.Employee;
 import org.maxim.issuetracker.domain.Member;
 import org.maxim.issuetracker.security.SecurityConstants;
-import org.maxim.issuetracker.service.interfaces.ActivityService;
-import org.maxim.issuetracker.service.interfaces.EmployeeService;
+import org.maxim.issuetracker.service.ActivityService;
+import org.maxim.issuetracker.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;

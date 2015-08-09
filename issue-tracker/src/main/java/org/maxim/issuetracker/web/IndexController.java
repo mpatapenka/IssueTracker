@@ -1,7 +1,7 @@
-package org.maxim.issuetracker.controllers;
+package org.maxim.issuetracker.web;
 
 import org.maxim.issuetracker.domain.Employee;
-import org.maxim.issuetracker.service.interfaces.EmployeeService;
+import org.maxim.issuetracker.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
