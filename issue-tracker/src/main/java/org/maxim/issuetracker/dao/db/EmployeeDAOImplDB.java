@@ -36,7 +36,10 @@ public class EmployeeDAOImplDB extends AbstractDAOHelperDB implements EmployeeDA
 
     @Override
     public Employee findByLogin(String login) {
-        List employees = currentSession().createQuery("from Employee where login=?").setParameter(0, login).list();
+        List employees = currentSession()
+                .createQuery("from Employee where login=:username")
+                .setParameter("username", login)
+                .list();
         if (employees.size() > 0) {
             return (Employee) employees.get(0);
         }
