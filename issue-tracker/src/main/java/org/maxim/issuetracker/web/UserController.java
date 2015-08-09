@@ -1,7 +1,5 @@
 package org.maxim.issuetracker.web;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.maxim.issuetracker.domain.Activity;
 import org.maxim.issuetracker.domain.Assigment;
 import org.maxim.issuetracker.domain.Employee;
@@ -19,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -55,25 +55,7 @@ public class UserController {
     @RequestMapping(value = "/dashboard/activity", method = RequestMethod.GET)
     public @ResponseBody String getActivities(@RequestParam int offset) {
         List<Activity> activities = activityService.listLast(offset);
-
-        List<Object> activityData = new ArrayList<>();
-        for (Activity activity : activities) {
-            Employee employee = activity.getMember().getEmployee();
-            Map<String, Object> activityInfo = new HashMap<>();
-
-            activityInfo.put("name", employee.getFirstName() + " " + employee.getLastName());
-            activityInfo.put("date", activity.getDate());
-            activityInfo.put("comment", activity.getComment());
-
-            activityData.add(activityInfo);
-        }
-
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.writeValueAsString(activityData);
-        } catch (JsonProcessingException ignore) {
-            return "";
-        }
+        return activityService.convertToJson(activities);
     }
 
 }

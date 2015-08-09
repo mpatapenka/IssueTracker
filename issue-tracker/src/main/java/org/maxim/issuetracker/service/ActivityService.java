@@ -10,4 +10,6 @@ public interface ActivityService {
 
     List<Activity> listLast(int offset);
 
+    String convertToJson(List<Activity> activities);
+
 }
