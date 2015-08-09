@@ -49,13 +49,18 @@
                         Assigned to Me
                     </div>
                     <div class="panel-content">
-                        <c:forEach var="assign" items="${assignToMe}">
-                            <p>
-                                <strong>${assign.task.project.name}</strong>
-                                    ${assign.task.project.description}
-                                    ${assign.description}
-                            </p>
-                        </c:forEach>
+                        <table class="table table-condensed table-hover">
+                            <thead>
+                                <td>Key</td>
+                                <td>Summary</td>
+                            </thead>
+                            <c:forEach var="assign" items="${assignToMe}">
+                                <tr>
+                                    <td><a href="#">${assign.task.project.name}</a></td>
+                                    <td><a href="#">${assign.task.project.description}</a></td>
+                                </tr>
+                            </c:forEach>
+                        </table>
                     </div>
                 </div>
             </div>
