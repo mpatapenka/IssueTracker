@@ -45,8 +45,6 @@ public class UserController {
         int withoutOffset = 0;
         List<Activity> lastActivities = activityService.listLast(withoutOffset);
 
-        model.addAttribute("userFullName", user.getFirstName() + " " + user.getLastName());
-        model.addAttribute("members", members);
         model.addAttribute("lastActivities", lastActivities);
         model.addAttribute("assignToMe", assignToMe);
 
