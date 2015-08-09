@@ -30,7 +30,7 @@
                    aria-expanded="true">${userFullName}<span class="caret"></span></a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <security:authorize access="hasRole('ROLE_ADMIN')">
-                        <li><a href="#">Admin page</a></li>
+                        <li><a href="/admin/panel">Admin panel</a></li>
                         <li role="separator" class="divider"></li>
                     </security:authorize>
                     <li><a href="/j_spring_security_logout">Log Out</a></li>
