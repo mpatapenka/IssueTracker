@@ -70,14 +70,12 @@ public class UserController {
             activityData.add(activityInfo);
         }
 
-        String jsonString = "";
-        ObjectMapper mapper = new ObjectMapper();
         try {
-            jsonString = mapper.writeValueAsString(activityData);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.writeValueAsString(activityData);
+        } catch (JsonProcessingException ignore) {
+            return "";
         }
-        return jsonString;
     }
 
 }
