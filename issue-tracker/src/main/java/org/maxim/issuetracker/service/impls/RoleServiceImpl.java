@@ -15,16 +15,6 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleDAO roleDAO;
 
-    public RoleServiceImpl() { }
-
-    public RoleServiceImpl(RoleDAO roleDAO) {
-        this.roleDAO = roleDAO;
-    }
-
-    public void setRoleDAO(RoleDAO roleDAO) {
-        this.roleDAO = roleDAO;
-    }
-
     @Override
     @Transactional
     public Role get(int id) {
