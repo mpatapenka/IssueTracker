@@ -58,9 +58,9 @@ html, body {
 }
 
 .login-panel-footer {
-    height: 60px;
+    height: 40px;
     font-size: 14px;
-    line-height: 30px;
+    line-height: 40px;
     color: #707070;
     text-align: center;
 }
@@ -83,7 +83,7 @@ html, body {
     background: #FFFFFF;
 }
 
-.alert-danger-fix {
+.ert-danger-fix {
     border-color: #BF5B5B;
     color: #BF5B5B;
 }
