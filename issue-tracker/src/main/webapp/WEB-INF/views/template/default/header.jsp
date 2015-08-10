@@ -17,12 +17,8 @@
                     </c:forEach>
                 </ul>
             </li>
-            <li class="dropdown menu-item">
-                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
-                   aria-expanded="true">Issues<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Issue 1</a></li>
-                </ul>
+            <li class="menu-item">
+                <a href="#" class="nav-link">Issues</a>
             </li>
             <li class="button nav-button menu-item"><a href="#" class="nav-link">Create Issue</a></li>
             <li class="account-button dropdown menu-item">
