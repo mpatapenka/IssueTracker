@@ -21,22 +21,22 @@ public class Employee implements Serializable {
     private int id;
 
     @Column(name = "firstname")
-    @Size(max = Constants.TEXT_MAX_SIZE, message = "Employee first name" + Constants.SIZE_ERROR_MSG_SUFFIX)
+    @Size(min = 3, max = Constants.TEXT_MAX_SIZE)
     private String firstName;
 
     @Column(name = "lastname")
-    @Size(max = Constants.TEXT_MAX_SIZE, message = "Employee last name" + Constants.SIZE_ERROR_MSG_SUFFIX)
+    @Size(min = 4, max = Constants.TEXT_MAX_SIZE)
     private String lastName;
 
     @Column(name = "login")
-    @Size(max = Constants.TEXT_MAX_SIZE, message = "Employee login" + Constants.SIZE_ERROR_MSG_SUFFIX)
+    @Size(min = 3, max = Constants.TEXT_MAX_SIZE)
     private String login;
 
     @Column(name = "password")
-    @Size(max = Constants.TEXT_MAX_SIZE, message = "Employee password" + Constants.SIZE_ERROR_MSG_SUFFIX)
+    @Size(min = 3, max = Constants.TEXT_MAX_SIZE)
     private String password;
 
-    @NotNull(message = "Employee position" + Constants.NULL_ERROR_MSG_SUFFIX)
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "positionid", nullable = false)

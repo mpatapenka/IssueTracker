@@ -19,11 +19,11 @@ public class Project implements Serializable {
     private int id;
 
     @Column(name = "name")
-    @Size(max = Constants.TEXT_MAX_SIZE, message = "Project name" + Constants.SIZE_ERROR_MSG_SUFFIX)
+    @Size(max = Constants.TEXT_MAX_SIZE)
     private String name;
 
     @Column(name = "description")
-    @Size(max = Constants.TEXT_MAX_SIZE, message = "Project description" + Constants.SIZE_ERROR_MSG_SUFFIX)
+    @Size(max = Constants.TEXT_MAX_SIZE)
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")

@@ -19,7 +19,7 @@ public class Status implements Serializable {
     private int id;
 
     @Column(name = "name")
-    @Size(max = Constants.TEXT_MAX_SIZE, message = "Status name" + Constants.SIZE_ERROR_MSG_SUFFIX)
+    @Size(max = Constants.TEXT_MAX_SIZE)
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "status")

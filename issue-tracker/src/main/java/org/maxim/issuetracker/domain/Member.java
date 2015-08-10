@@ -19,21 +19,21 @@ public class Member implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull(message = "Member project" + Constants.NULL_ERROR_MSG_SUFFIX)
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "projectid", nullable = false)
     @JsonBackReference
     private Project project;
 
-    @NotNull(message = "Member employee" + Constants.NULL_ERROR_MSG_SUFFIX)
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "employeeid", nullable = false)
     @JsonBackReference
     private Employee employee;
 
-    @NotNull(message = "Member role" + Constants.NULL_ERROR_MSG_SUFFIX)
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "roleid", nullable = false)

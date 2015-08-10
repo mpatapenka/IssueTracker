@@ -21,7 +21,7 @@ public class Task implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull(message = "Task project" + Constants.NULL_ERROR_MSG_SUFFIX)
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "projectid", nullable = false)
@@ -29,7 +29,7 @@ public class Task implements Serializable {
     private Project project;
 
     @Column(name = "description")
-    @Size(max = Constants.TEXT_MAX_SIZE, message = "Task description" + Constants.SIZE_ERROR_MSG_SUFFIX)
+    @Size(max = Constants.TEXT_MAX_SIZE)
     private String description;
 
     @Column(name = "psd")
@@ -44,7 +44,7 @@ public class Task implements Serializable {
     @Column(name = "aed")
     private Date actionEndDate;
 
-    @NotNull(message = "Task status" + Constants.NULL_ERROR_MSG_SUFFIX)
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "statusid", nullable = false)

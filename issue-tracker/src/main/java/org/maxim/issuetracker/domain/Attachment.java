@@ -18,25 +18,25 @@ public class Attachment implements Serializable {
     private int id;
 
     @Column(name = "name")
-    @Size(max = Constants.TEXT_MAX_SIZE, message = "Attachment name" + Constants.SIZE_ERROR_MSG_SUFFIX)
+    @Size(max = Constants.TEXT_MAX_SIZE)
     private String name;
 
     @Column(name = "size")
-    @Size(max = Constants.TEXT_MAX_SIZE, message = "Attachment size" + Constants.SIZE_ERROR_MSG_SUFFIX)
+    @Size(max = Constants.TEXT_MAX_SIZE)
     private String size;
 
     @Column(name = "description")
-    @Size(max = Constants.TEXT_MAX_SIZE, message = "Attachment description" + Constants.SIZE_ERROR_MSG_SUFFIX)
+    @Size(max = Constants.TEXT_MAX_SIZE)
     private String description;
 
-    @NotNull(message = "Attachment project" + Constants.NULL_ERROR_MSG_SUFFIX)
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "projectid", nullable = false)
     @JsonBackReference
     private Project project;
 
-    @NotNull(message = "Attachment task" + Constants.NULL_ERROR_MSG_SUFFIX)
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "taskid", nullable = false)

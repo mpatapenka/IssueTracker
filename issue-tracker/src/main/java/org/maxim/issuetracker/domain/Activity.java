@@ -29,17 +29,17 @@ public class Activity implements Serializable {
     private int duration;
 
     @Column(name = "comment")
-    @Size(max = Constants.TEXT_MAX_SIZE, message = "Activity comment" + Constants.SIZE_ERROR_MSG_SUFFIX)
+    @Size(max = Constants.TEXT_MAX_SIZE)
     private String comment;
 
-    @NotNull(message = "Activity member" + Constants.NULL_ERROR_MSG_SUFFIX)
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "memberid", nullable = false)
     @JsonBackReference
     private Member member;
 
-    @NotNull(message = "Activity assigment" + Constants.NULL_ERROR_MSG_SUFFIX)
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "assigmentid", nullable = false)

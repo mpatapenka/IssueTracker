@@ -20,14 +20,14 @@ public class Assigment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull(message = "Assigment member" + Constants.NULL_ERROR_MSG_SUFFIX)
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "memberid", nullable = false)
     @JsonBackReference
     private Member member;
 
-    @NotNull(message = "Assigment task" + Constants.NULL_ERROR_MSG_SUFFIX)
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "taskid", nullable = false)
@@ -35,7 +35,7 @@ public class Assigment implements Serializable {
     private Task task;
 
     @Column(name = "description")
-    @Size(max = Constants.TEXT_MAX_SIZE, message = "Assigment description" + Constants.SIZE_ERROR_MSG_SUFFIX)
+    @Size(max = Constants.TEXT_MAX_SIZE)
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "assigment")
