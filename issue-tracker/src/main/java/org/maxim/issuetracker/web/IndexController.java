@@ -38,9 +38,4 @@ public class IndexController {
         return "login";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String showRegisterPage() {
-        return "register";
-    }
-
 }
