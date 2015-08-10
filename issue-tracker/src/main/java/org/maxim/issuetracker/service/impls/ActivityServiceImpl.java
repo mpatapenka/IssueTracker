@@ -21,16 +21,6 @@ public class ActivityServiceImpl implements ActivityService {
     @Autowired
     private ActivityDAO activityDAO;
 
-    public ActivityServiceImpl() { }
-
-    public ActivityServiceImpl(ActivityDAO activityDAO) {
-        this.activityDAO = activityDAO;
-    }
-
-    public void setActivityDAO(ActivityDAO activityDAO) {
-        this.activityDAO = activityDAO;
-    }
-
     @Override
     @Transactional
     public List<Activity> list() {
