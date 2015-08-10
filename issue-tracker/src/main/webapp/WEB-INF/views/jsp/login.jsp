@@ -32,7 +32,6 @@
                     <input type="submit" class="login-button" value="Log in">
                 </form>
                 <div class="login-panel-footer">
-                    Need an account? <a href="/register">Sign up</a>.<br>
                     Back to start page? <a href="/">Dashboard</a>.
                 </div>
             </div>
