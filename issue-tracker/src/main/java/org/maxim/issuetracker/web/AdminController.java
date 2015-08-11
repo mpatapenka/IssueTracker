@@ -6,7 +6,7 @@ import org.maxim.issuetracker.security.SecurityConstants;
 import org.maxim.issuetracker.service.EmployeeService;
 import org.maxim.issuetracker.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,13 +27,13 @@ public class AdminController {
     @Autowired
     private EmployeeService employeeService;
 
-    @Secured(SecurityConstants.ROLE_ADMIN)
+    @PreAuthorize(SecurityConstants.HAS_ROLE_ADMIN)
     @RequestMapping(value = "/panel", method = RequestMethod.GET)
     public String showAdmin(Model model) {
         return "adminpage";
     }
 
-    @Secured(SecurityConstants.ROLE_ADMIN)
+    @PreAuthorize(SecurityConstants.HAS_ROLE_ADMIN)
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String showRegisterPage(Model model) {
         model.addAttribute(new Employee());
@@ -45,7 +45,7 @@ public class AdminController {
         return positionService.list();
     }
 
-    @Secured(SecurityConstants.ROLE_ADMIN)
+    @PreAuthorize(SecurityConstants.HAS_ROLE_ADMIN)
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerNewUser(@Valid Employee employee, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
