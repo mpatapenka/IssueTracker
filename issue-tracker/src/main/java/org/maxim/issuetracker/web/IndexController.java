@@ -1,20 +1,30 @@
 package org.maxim.issuetracker.web;
 
 import org.maxim.issuetracker.domain.Employee;
+import org.maxim.issuetracker.domain.Project;
+import org.maxim.issuetracker.security.SecurityConstants;
 import org.maxim.issuetracker.service.EmployeeService;
+import org.maxim.issuetracker.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 @Controller
 public class IndexController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private ProjectService projectService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String start() {
@@ -36,6 +46,31 @@ public class IndexController {
             model.addAttribute("logoutMessage", "Logout successful.");
         }
         return "login";
+    }
+
+    @PreAuthorize(SecurityConstants.HAS_ROLE_ADMIN)
+    @RequestMapping(value = "/projects", method = RequestMethod.GET, params = "new")
+    public String showCreateProjectForm(Model model) {
+        model.addAttribute(new Project());
+        return "projectform";
+    }
+
+    @PreAuthorize(SecurityConstants.HAS_ROLE_ADMIN)
+    @RequestMapping(value = "/projects", method = RequestMethod.POST, params = "new")
+    public String addNewProject(@Valid Project project, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "projectform";
+        }
+        projectService.add(project);
+        return "redirect:/admin/panel";
+    }
+
+    @PreAuthorize(SecurityConstants.IS_AUTHENTICATED)
+    @RequestMapping(value = "/projects", method = RequestMethod.GET, params = "id")
+    public String showProject(@RequestParam int id, Model model) {
+        Project project = projectService.get(id);
+        model.addAttribute("project", project);
+        return "projects";
     }
 
 }
