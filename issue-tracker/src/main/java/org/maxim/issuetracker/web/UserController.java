@@ -8,7 +8,7 @@ import org.maxim.issuetracker.security.SecurityConstants;
 import org.maxim.issuetracker.service.ActivityService;
 import org.maxim.issuetracker.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +31,7 @@ public class UserController {
     @Autowired
     private ActivityService activityService;
 
-    @Secured(value = SecurityConstants.ROLE_USER)
+    @PreAuthorize(SecurityConstants.IS_AUTHENTICATED)
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public String showDashboard(Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -51,7 +51,7 @@ public class UserController {
         return "dashboard";
     }
 
-    @Secured(value = SecurityConstants.ROLE_USER)
+    @PreAuthorize(SecurityConstants.IS_AUTHENTICATED)
     @RequestMapping(value = "/dashboard/activity", method = RequestMethod.GET)
     public @ResponseBody String getActivities(@RequestParam int offset) {
         List<Activity> activities = activityService.listLast(offset);

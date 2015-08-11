@@ -176,3 +176,46 @@ html, body {
     margin-bottom: 10px;
     border-bottom: 1px solid #ddd;
 }
+
+.project-form-item {
+    width: 100%;
+    border-radius: 4px;
+    padding: 4px 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 14px;
+    height: 40px;
+    margin: 5px 0;
+}
+
+.project-form-textarea {
+    height: 100px;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.default-form-btn {
+    font-size: 16px;
+    background: #3572b0;
+    border-color: transparent;
+    color: #fff;
+    border-radius: 3px;
+    margin: 5px 0;
+    cursor: pointer;
+    width: 100%;
+    height: 40px;
+}
+
+.alert-fix {
+    margin-bottom: 0;
+    height: 40px;
+    font-size: 14px;
+    line-height: 30px;
+    padding: 4px 30px 4px 10px;
+    background: #FFFFFF;
+}
+
+.alert-danger-fix {
+    border-color: #BF5B5B;
+    color: #BF5B5B;
+}
