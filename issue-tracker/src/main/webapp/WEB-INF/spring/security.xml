@@ -2,35 +2,37 @@
 <beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns="http://www.springframework.org/schema/security"
-             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd http://www.springframework.org/schema/security
-                 http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                                http://www.springframework.org/schema/security
+                                http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+    <http pattern="/resources/core/**" security="none"/>
 
     <http auto-config="true" use-expressions="true">
+        <csrf disabled="true"/>
+
         <access-denied-handler error-page="/"/>
 
         <form-login login-page="/login"
                     login-processing-url="/j_spring_security_check"
-                    authentication-failure-url="/login?error=true"
+                    authentication-failure-url="/login?error"
                     default-target-url="/"
+                    always-use-default-target="true"
                     username-parameter="username"
                     password-parameter="password"/>
 
         <logout logout-url="/j_spring_security_logout"
-                logout-success-url="/login?logout"/>
-
-        <intercept-url pattern="/login*" access="hasRole('ROLE_ANONYMOUS')"/>
-        <intercept-url pattern="/user/**" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
-
-        <anonymous username="guest" granted-authority="ROLE_ANONYMOUS"/>
-
-        <csrf disabled="true"/>
+                logout-success-url="/login?logout"
+                invalidate-session="true"/>
     </http>
 
-    <authentication-manager>
-        <authentication-provider ref="appAuthProvider"/>
-    </authentication-manager>
+    <global-method-security pre-post-annotations="enabled"/>
 
-    <beans:bean id="appAuthProvider" class="org.maxim.issuetracker.security.AppAuthenticationProvider"/>
+    <beans:bean id="appAuthService" class="org.maxim.issuetracker.service.impls.UserDetailsServiceImpl"/>
+
+    <authentication-manager>
+        <authentication-provider user-service-ref="appAuthService"/>
+    </authentication-manager>
 
 </beans:beans>
