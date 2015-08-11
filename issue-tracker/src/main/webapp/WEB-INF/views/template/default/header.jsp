@@ -12,8 +12,12 @@
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
                    aria-expanded="false">Projects<span class="caret"></span></a>
                 <ul class="dropdown-menu">
+                    <c:if test="${empty members}">
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">No projects</a></li>
+                    </c:if>
                     <c:forEach var="member" items="${members}">
-                        <li><a href="#">${member.project.name}</a></li>
+                        <li><a href="/projects?id=${member.project.id}">${member.project.name}</a></li>
                     </c:forEach>
                 </ul>
             </li>
