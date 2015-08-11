@@ -8,7 +8,6 @@
     <meta charset="UTF-8">
     <title><spring:message code="app.name"/></title>
     <link href="<spring:url value='/resources/core/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css">
-    <link href="<spring:url value='/resources/core/css/bootstrap-theme.min.css'/>" rel="stylesheet" type="text/css">
     <link href="<spring:url value='/resources/core/css/styles.css'/>" rel="stylesheet" type="text/css">
 </head>
 
