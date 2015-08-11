@@ -19,7 +19,7 @@ public class Project implements Serializable {
     private int id;
 
     @Column(name = "name")
-    @Size(max = Constants.TEXT_MAX_SIZE)
+    @Size(min = 4, max = Constants.TEXT_MAX_SIZE)
     private String name;
 
     @Column(name = "description")
