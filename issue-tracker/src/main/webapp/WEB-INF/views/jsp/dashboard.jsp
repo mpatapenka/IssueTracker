@@ -17,7 +17,6 @@
                         <p>
                             <strong>Welcome to Issue Tracker</strong>
                         </p>
-
                         <p>
                             Please sign in.
                         </p>
@@ -56,8 +55,8 @@
                             </thead>
                             <c:forEach var="assign" items="${assignToMe}">
                                 <tr>
-                                    <td><a href="#">${assign.task.project.name}</a></td>
-                                    <td><a href="#">${assign.task.project.description}</a></td>
+                                    <td><a href="/projects?id=${assign.task.project.id}">${assign.task.project.name}</a></td>
+                                    <td><a href="#">${assign.task.description}</a></td>
                                 </tr>
                             </c:forEach>
                         </table>
