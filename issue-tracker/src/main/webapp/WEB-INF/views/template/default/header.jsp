@@ -7,24 +7,27 @@
         <li class="menu-item">
             <a href="/" class="nav-link">Dashboard</a>
         </li>
-        <security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
+        <security:authorize access="isAuthenticated()">
             <li class="dropdown menu-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
                    aria-expanded="false">Projects<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <c:if test="${empty members}">
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">No projects</a></li>
+                        <li><a href="#">No projects for me</a></li>
                     </c:if>
                     <c:forEach var="member" items="${members}">
                         <li><a href="/projects?id=${member.project.id}">${member.project.name}</a></li>
                     </c:forEach>
                 </ul>
             </li>
+        </security:authorize>
+        <security:authorize access="hasRole('ROLE_USER')">
             <li class="menu-item">
                 <a href="#" class="nav-link">Issues</a>
             </li>
             <li class="button nav-button menu-item"><a href="#" class="nav-link">Create Issue</a></li>
+        </security:authorize>
+        <security:authorize access="isAuthenticated()">
             <li class="account-button dropdown menu-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
                    aria-expanded="true">${userFullName}<span class="caret"></span></a>
