@@ -29,7 +29,7 @@ public class AdminController {
 
     @PreAuthorize(SecurityConstants.HAS_ROLE_ADMIN)
     @RequestMapping(value = "/panel", method = RequestMethod.GET)
-    public String showAdmin(Model model) {
+    public String showAdmin() {
         return "adminpage";
     }
 
