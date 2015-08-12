@@ -1,4 +1,4 @@
-package org.maxim.issuetracker.web;
+package org.maxim.issuetracker.web.advice;
 
 import org.maxim.issuetracker.domain.Employee;
 import org.maxim.issuetracker.domain.Member;
