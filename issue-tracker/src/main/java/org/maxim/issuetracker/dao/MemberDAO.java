@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface MemberDAO {
 
+    boolean isExist(Member member);
+
     void save(Member member);
 
     void delete(int id);

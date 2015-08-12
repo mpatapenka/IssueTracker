@@ -10,10 +10,21 @@ import java.util.List;
 @Repository
 public class MemberDAOImplDB extends AbstractDAOHelperDB implements MemberDAO {
 
-    public MemberDAOImplDB() { }
+    public MemberDAOImplDB() {
+    }
 
     public MemberDAOImplDB(SessionFactory sessionFactory) {
         super(sessionFactory);
+    }
+
+    @Override
+    public boolean isExist(Member member) {
+        List members = currentSession()
+                .createQuery("from Member where project.id=:projectid and employee.id=:employeeid")
+                .setParameter("projectid", member.getProject().getId())
+                .setParameter("employeeid", member.getEmployee().getId())
+                .list();
+        return members.size() > 0;
     }
 
     @Override
