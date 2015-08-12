@@ -16,10 +16,17 @@
                 </div>
                 <div class="panel-content">
                     <table class="table table-condensed table-hover">
-                        <thead>
-                            <td>Description</td>
-                            <td>Status</td>
-                        </thead>
+                        <c:if test="${not empty project.tasks}">
+                            <thead>
+                                <td>Description</td>
+                                <td>Status</td>
+                            </thead>
+                        </c:if>
+                        <c:if test="${empty project.tasks}">
+                            <tr>
+                                <td colspan="2" align="center"><a href="#">No one</a></td>
+                            </tr>
+                        </c:if>
                         <c:forEach var="task" items="${project.tasks}">
                             <tr>
                                 <td><a href="#">${task.description}</a></td>
@@ -43,10 +50,17 @@
                 </div>
                 <div class="panel-content">
                     <table class="table table-condensed table-hover">
-                        <thead>
-                        <td>Name</td>
-                        <td>Role</td>
-                        </thead>
+                        <c:if test="${not empty project.members}">
+                            <thead>
+                                <td>Name</td>
+                                <td>Role</td>
+                            </thead>
+                        </c:if>
+                        <c:if test="${empty project.members}">
+                            <tr>
+                                <td colspan="2" align="center"><a href="#">No one</a></td>
+                            </tr>
+                        </c:if>
                         <c:forEach var="member" items="${project.members}">
                             <tr>
                                 <td><a href="#">${member.employee.firstName} ${member.employee.lastName}</a></td>
@@ -58,7 +72,6 @@
                         <a href="#addModal" class="button" data-toggle="modal">
                             <span class="btn-panel">Add member</span>
                         </a>
-
                         <div class="modal fade" id="addModal" tabindex="-1" role="dialog"
                              aria-labelledby="addModalLabel">
                             <div class="modal-dialog" role="document">
