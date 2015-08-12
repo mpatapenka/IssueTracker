@@ -51,17 +51,13 @@ public class AdminController {
         if (bindingResult.hasErrors()) {
             return "register";
         }
-        boolean result;
         try {
-            result = employeeService.register(employee);
-        } catch (Exception ignore) {
-            result = false;
-        }
-        if (!result) {
-            model.addAttribute("errorMessage", "User with username '" + employee.getLogin() + "' already exist.");
+            employeeService.register(employee);
+            return "redirect:/admin/panel";
+        } catch (RuntimeException e) {
+            model.addAttribute("errorMessage", e.getMessage());
             return "register";
         }
-        return "redirect:/admin/panel";
     }
 
 }
