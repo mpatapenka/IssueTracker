@@ -4,7 +4,7 @@ import org.maxim.issuetracker.domain.Employee;
 
 public interface EmployeeService {
 
-    boolean register(Employee employee);
+    void register(Employee employee);
 
     Employee findByLogin(String login);
 
