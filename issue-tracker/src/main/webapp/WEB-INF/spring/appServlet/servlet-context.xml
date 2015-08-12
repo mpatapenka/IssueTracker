@@ -8,6 +8,8 @@
 
     <resources mapping="/resources/**" location="/resources/"/>
 
+    <resources mapping="/favicon.ico" location="/resources/core/images/favicon.ico"/>
+
     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <beans:property name="prefix" value="/WEB-INF/views/jsp/"/>
         <beans:property name="suffix" value=".jsp"/>
