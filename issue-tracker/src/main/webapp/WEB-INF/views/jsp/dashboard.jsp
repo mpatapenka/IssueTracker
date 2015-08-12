@@ -17,6 +17,7 @@
                         <p>
                             <strong>Welcome to Issue Tracker</strong>
                         </p>
+
                         <p>
                             Please sign in.
                         </p>
@@ -49,13 +50,21 @@
                     </div>
                     <div class="panel-content">
                         <table class="table table-condensed table-hover">
-                            <thead>
-                                <td>Key</td>
-                                <td>Summary</td>
-                            </thead>
+                            <c:if test="${not empty assignToMe}">
+                                <thead>
+                                    <td>Key</td>
+                                    <td>Summary</td>
+                                </thead>
+                            </c:if>
+                            <c:if test="${empty assignToMe}">
+                                <tr>
+                                    <td colspan="2" align="center"><a href="#">No one</a></td>
+                                </tr>
+                            </c:if>
                             <c:forEach var="assign" items="${assignToMe}">
                                 <tr>
-                                    <td><a href="/projects?id=${assign.task.project.id}">${assign.task.project.name}</a></td>
+                                    <td><a href="/projects?id=${assign.task.project.id}">${assign.task.project.name}</a>
+                                    </td>
                                     <td><a href="#">${assign.task.description}</a></td>
                                 </tr>
                             </c:forEach>
