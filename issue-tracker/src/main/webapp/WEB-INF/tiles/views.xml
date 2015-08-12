@@ -22,6 +22,10 @@
         <put-attribute name="content" value="/WEB-INF/views/jsp/login.jsp"/>
     </definition>
 
+    <definition name="404" extends="ftemplate">
+        <put-attribute name="content" value="/WEB-INF/views/jsp/404.jsp"/>
+    </definition>
+
     <definition name="register" extends="ftemplate">
         <put-attribute name="content" value="/WEB-INF/views/jsp/register.jsp"/>
     </definition>
