@@ -52,8 +52,9 @@ public class UserController {
     }
 
     @PreAuthorize(SecurityConstants.IS_AUTHENTICATED)
+    @ResponseBody
     @RequestMapping(value = "/dashboard/activity", method = RequestMethod.GET)
-    public @ResponseBody String getActivities(@RequestParam int offset) {
+    public String getActivities(@RequestParam int offset) {
         List<Activity> activities = activityService.listLast(offset);
         return activityService.convertToJson(activities);
     }
