@@ -1,19 +1,21 @@
 package org.maxim.issuetracker.web;
 
 import org.maxim.issuetracker.domain.Employee;
+import org.maxim.issuetracker.domain.Member;
 import org.maxim.issuetracker.domain.Project;
+import org.maxim.issuetracker.domain.Role;
 import org.maxim.issuetracker.security.SecurityConstants;
 import org.maxim.issuetracker.service.EmployeeService;
+import org.maxim.issuetracker.service.MemberService;
 import org.maxim.issuetracker.service.ProjectService;
+import org.maxim.issuetracker.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -25,6 +27,12 @@ public class IndexController {
 
     @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private RoleService roleService;
+
+    @Autowired
+    private MemberService memberService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String start() {
@@ -70,7 +78,34 @@ public class IndexController {
     public String showProject(@RequestParam int id, Model model) {
         Project project = projectService.get(id);
         model.addAttribute("project", project);
+        model.addAttribute("addMember", new Member());
+        model.addAttribute("employees", employeeService.list());
+        model.addAttribute("roles", roleService.list());
         return "projects";
+    }
+
+    @PreAuthorize(SecurityConstants.HAS_ROLE_ADMIN)
+    @ResponseBody
+    @RequestMapping(value = "/projects", method = RequestMethod.POST, params = "id")
+    public String addMember(@RequestParam int id, Member member) {
+        Project project = projectService.get(id);
+        Role role = roleService.get(member.getRole().getId());
+        Employee employee = employeeService.get(member.getEmployee().getId());
+
+        String errorMessage = "";
+        if (project == null || role == null || employee == null) {
+            errorMessage = "Check your input data. Some values was incorrect.";
+        } else {
+            member.setEmployee(employee);
+            member.setRole(role);
+            member.setProject(project);
+            try {
+                memberService.add(member);
+            } catch (RuntimeException e) {
+                errorMessage = e.getMessage();
+            }
+        }
+        return errorMessage;
     }
 
 }
