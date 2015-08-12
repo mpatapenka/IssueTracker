@@ -38,8 +38,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         List<GrantedAuthority> auth = new ArrayList<>();
         if (SecurityConstants.ADMIN_POSITION.equals(position.getName())) {
             auth.add(new SimpleGrantedAuthority(SecurityConstants.ROLE_ADMIN));
+        } else {
+            auth.add(new SimpleGrantedAuthority(SecurityConstants.ROLE_USER));
         }
-        auth.add(new SimpleGrantedAuthority(SecurityConstants.ROLE_USER));
         return auth;
     }
 
