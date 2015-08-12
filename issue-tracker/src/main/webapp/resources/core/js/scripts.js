@@ -61,3 +61,31 @@ $("a.show-more-btn").click(function () {
     });
     return false;
 });
+
+function memberAdd(id) {
+    $.ajax({
+        url: "/projects?id=" + id,
+        data: $('#memberForm').serialize(),
+        type: "POST",
+        success: function (result) {
+            if (result != "") {
+                var element = $('.insertBefore');
+                var strDiv = '<div id="insertedError" class="alert alert-danger alert-dismissible alert-fix alert-danger-fix" role="alert">' +
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                    '<span aria-hidden="true">&times;</span></button>' + result + '</div>';
+                var insElem = $(strDiv);
+                var parent = document.getElementById("memberForm");
+                var test = document.getElementById("insertedError");
+                if (test != null) {
+                    parent.removeChild(test);
+                }
+                insElem.insertBefore(element);
+            } else {
+                location.reload();
+            }
+        },
+        error: function (xhr) {
+            MvcUtil.showErrorResponse(xhr.responseText, link);
+        }
+    });
+}
