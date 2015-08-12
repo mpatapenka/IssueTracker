@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
@@ -23,6 +25,12 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional
     public void add(Project project) {
         projectDAO.save(project);
+    }
+
+    @Override
+    @Transactional
+    public List<Project> list() {
+        return projectDAO.list();
     }
 
 }
