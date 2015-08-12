@@ -17,6 +17,15 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
+    public void add(Member member) {
+        if (memberDAO.isExist(member)) {
+            throw new IllegalArgumentException("Employee already working with project.");
+        }
+        memberDAO.save(member);
+    }
+
+    @Override
+    @Transactional
     public List<Member> list() {
         return memberDAO.list();
     }
