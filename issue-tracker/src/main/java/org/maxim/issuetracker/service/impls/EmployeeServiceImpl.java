@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -32,8 +34,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
+    public Employee get(int id) {
+        return employeeDAO.findById(id);
+    }
+
+    @Override
+    @Transactional
     public Employee findByLogin(String login) {
         return employeeDAO.findByLogin(login);
+    }
+
+    @Override
+    @Transactional
+    public List<Employee> list() {
+        return employeeDAO.list();
     }
 
 }
