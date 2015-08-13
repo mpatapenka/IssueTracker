@@ -29,7 +29,7 @@ public class Task implements Serializable {
     private Project project;
 
     @Column(name = "description")
-    @Size(max = Constants.TEXT_MAX_SIZE)
+    @Size(max = ValidationConstants.TEXT_MAX_SIZE)
     private String description;
 
     @Column(name = "psd")

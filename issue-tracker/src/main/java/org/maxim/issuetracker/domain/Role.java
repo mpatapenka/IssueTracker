@@ -19,7 +19,7 @@ public class Role implements Serializable {
     private int id;
 
     @Column(name = "name")
-    @Size(max = Constants.TEXT_MAX_SIZE)
+    @Size(max = ValidationConstants.TEXT_MAX_SIZE)
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "role")

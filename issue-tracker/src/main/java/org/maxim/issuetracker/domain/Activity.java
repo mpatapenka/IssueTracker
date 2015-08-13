@@ -24,12 +24,12 @@ public class Activity implements Serializable {
     private Date date;
 
     @Column(name = "duration")
-    @Min(value = Constants.MIN_DURATION)
-    @Max(value = Constants.MAX_DURATION_PER_DAY)
+    @Min(value = ValidationConstants.MIN_DURATION)
+    @Max(value = ValidationConstants.MAX_DURATION_PER_DAY)
     private int duration;
 
     @Column(name = "comment")
-    @Size(max = Constants.TEXT_MAX_SIZE)
+    @Size(max = ValidationConstants.TEXT_MAX_SIZE)
     private String comment;
 
     @NotNull

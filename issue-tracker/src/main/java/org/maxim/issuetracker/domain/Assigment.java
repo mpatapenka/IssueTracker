@@ -35,7 +35,7 @@ public class Assigment implements Serializable {
     private Task task;
 
     @Column(name = "description")
-    @Size(max = Constants.TEXT_MAX_SIZE)
+    @Size(max = ValidationConstants.TEXT_MAX_SIZE)
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "assigment")

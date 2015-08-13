@@ -21,19 +21,19 @@ public class Employee implements Serializable {
     private int id;
 
     @Column(name = "firstname")
-    @Size(min = 3, max = Constants.TEXT_MAX_SIZE)
+    @Size(min = 3, max = ValidationConstants.TEXT_MAX_SIZE)
     private String firstName;
 
     @Column(name = "lastname")
-    @Size(min = 4, max = Constants.TEXT_MAX_SIZE)
+    @Size(min = 4, max = ValidationConstants.TEXT_MAX_SIZE)
     private String lastName;
 
     @Column(name = "login")
-    @Size(min = 3, max = Constants.TEXT_MAX_SIZE)
+    @Size(min = 3, max = ValidationConstants.TEXT_MAX_SIZE)
     private String login;
 
     @Column(name = "password")
-    @Size(min = 3, max = Constants.TEXT_MAX_SIZE)
+    @Size(min = 3, max = ValidationConstants.TEXT_MAX_SIZE)
     private String password;
 
     @NotNull

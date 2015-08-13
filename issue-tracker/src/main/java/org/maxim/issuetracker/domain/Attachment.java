@@ -18,15 +18,15 @@ public class Attachment implements Serializable {
     private int id;
 
     @Column(name = "name")
-    @Size(max = Constants.TEXT_MAX_SIZE)
+    @Size(max = ValidationConstants.TEXT_MAX_SIZE)
     private String name;
 
     @Column(name = "size")
-    @Size(max = Constants.TEXT_MAX_SIZE)
+    @Size(max = ValidationConstants.TEXT_MAX_SIZE)
     private String size;
 
     @Column(name = "description")
-    @Size(max = Constants.TEXT_MAX_SIZE)
+    @Size(max = ValidationConstants.TEXT_MAX_SIZE)
     private String description;
 
     @NotNull
