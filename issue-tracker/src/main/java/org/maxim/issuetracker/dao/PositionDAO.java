@@ -14,4 +14,6 @@ public interface PositionDAO {
 
     List<Position> list();
 
+    List<Position> listAllowed();
+
 }

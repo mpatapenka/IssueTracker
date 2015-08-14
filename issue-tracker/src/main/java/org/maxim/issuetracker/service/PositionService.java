@@ -10,4 +10,6 @@ public interface PositionService {
 
     List<Position> list();
 
+    List<Position> listAllowed();
+
 }

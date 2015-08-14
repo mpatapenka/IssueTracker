@@ -27,4 +27,10 @@ public class PositionServiceImpl implements PositionService {
         return positionDAO.list();
     }
 
+    @Override
+    @Transactional
+    public List<Position> listAllowed() {
+        return positionDAO.listAllowed();
+    }
+
 }
