@@ -1,13 +1,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 
 <div class="header">
     <ul class="navigation">
-        <li class="menu-item">
-            <a href="/" class="nav-link">Dashboard</a>
-        </li>
-        <security:authorize access="isAuthenticated()">
+        <security:authorize access="isAnonymous()">
+            <li class="menu-item">
+                <a href="/" class="nav-link">Preview dashboard</a>
+            </li>
+        </security:authorize>
+        <security:authorize access="hasRole('ROLE_ADMIN')">
+            <li class="menu-item">
+                <a href="/" class="nav-link">Admin panel</a>
+            </li>
+        </security:authorize>
+        <security:authorize access="hasRole('ROLE_USER')">
+            <li class="menu-item">
+                <a href="/" class="nav-link">Dashboard</a>
+            </li>
             <li class="dropdown menu-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
                    aria-expanded="false">Projects<span class="caret"></span></a>
@@ -20,23 +31,18 @@
                     </c:forEach>
                 </ul>
             </li>
-        </security:authorize>
-        <security:authorize access="hasRole('ROLE_USER')">
             <li class="menu-item">
                 <a href="#" class="nav-link">Issues</a>
             </li>
-            <li class="button nav-button menu-item"><a href="#" class="nav-link">Create Issue</a></li>
+            <li class="button nav-button menu-item"><a href="#issueModal" data-toggle="modal" class="nav-link">Create
+                Issue</a></li>
         </security:authorize>
         <security:authorize access="isAuthenticated()">
             <li class="account-button dropdown menu-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
-                   aria-expanded="true">${userFullName}<span class="caret"></span></a>
+                   aria-expanded="true">${user}<span class="caret"></span></a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <security:authorize access="hasRole('ROLE_ADMIN')">
-                        <li><a href="/admin/panel">Admin panel</a></li>
-                        <li role="separator" class="divider"></li>
-                    </security:authorize>
-                    <li><a href="/j_spring_security_logout">Log Out</a></li>
+                    <li><a href="/j_spring_security_logout">Log out</a></li>
                 </ul>
             </li>
         </security:authorize>
@@ -45,3 +51,37 @@
         </security:authorize>
     </ul>
 </div>
+
+<security:authorize access="hasRole('ROLE_USER')">
+    <div class="modal fade" id="issueModal" tabindex="-1" role="dialog"
+         aria-labelledby="issueModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Create issue</h4>
+                </div>
+                <div class="modal-body">
+                    <sf:form method="post" id="issueForm" modelAttribute="task">
+                        <sf:select class="project-form-item insertBefore" path="project.id">
+                            <sf:option value="-1">Project</sf:option>
+                            <c:forEach var="proj" items="${projects}">
+                                <sf:option value="${proj.id}">
+                                    ${proj.name}
+                                </sf:option>
+                            </c:forEach>
+                        </sf:select>
+                    </sf:form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                    </button>
+                    <button type="button" class="btn btn-success"
+                            onclick="">Add
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</security:authorize>
