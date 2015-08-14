@@ -49,7 +49,7 @@ public class AdminController {
 
     @ModelAttribute
     public void setDefaultAttributesToModel(Model model) {
-        model.addAttribute("positions", positionService.list());
+        model.addAttribute("positions", positionService.listAllowed());
         model.addAttribute("newProject", new Project());
     }
 

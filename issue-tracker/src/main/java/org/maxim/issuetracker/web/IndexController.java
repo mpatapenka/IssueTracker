@@ -68,7 +68,7 @@ public class IndexController {
         Project project = projectService.get(id);
         model.addAttribute("project", project);
         model.addAttribute("addMember", new Member());
-        model.addAttribute("employees", employeeService.list());
+        model.addAttribute("employees", employeeService.listAllowed());
         model.addAttribute("roles", roleService.list());
         return "projects";
     }
