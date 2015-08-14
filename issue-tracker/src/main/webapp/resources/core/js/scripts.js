@@ -38,8 +38,8 @@ $("a.show-more-btn").click(function () {
             }
             offset += 1;
         },
-        error: function (xhr) {
-            MvcUtil.showErrorResponse(xhr.responseText, link);
+        error: function () {
+            location.reload();
         }
     });
     $.ajax({
@@ -52,11 +52,10 @@ $("a.show-more-btn").click(function () {
         success: function (json) {
             if (json == "") {
                 document.getElementById(showMoreBtn).style.display = "none";
-                return;
             }
         },
-        error: function (xhr) {
-            MvcUtil.showErrorResponse(xhr.responseText, link);
+        error: function () {
+            location.reload();
         }
     });
     return false;
@@ -84,8 +83,37 @@ function memberAdd(id) {
                 location.reload();
             }
         },
-        error: function (xhr) {
-            MvcUtil.showErrorResponse(xhr.responseText, link);
+        error: function () {
+            location.reload();
+        }
+    });
+}
+
+function projectAdd() {
+    $.ajax({
+        url: "/projects?new",
+        data: $('#newProjectForm').serialize(),
+        type: "POST",
+        success: function (result) {
+            if (result != "") {
+                result = result.replace('\n', '<br>');
+                var element = $('.insertBefore');
+                var strDiv = '<div id="insertedError" class="alert alert-danger alert-dismissible alert-fix alert-danger-fix" role="alert">' +
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                    '<span aria-hidden="true">&times;</span></button>' + result + '</div>';
+                var insElem = $(strDiv);
+                var parent = document.getElementById("newProjectForm");
+                var test = document.getElementById("insertedError");
+                if (test != null) {
+                    parent.removeChild(test);
+                }
+                insElem.insertBefore(element);
+            } else {
+                location.reload();
+            }
+        },
+        error: function () {
+            location.reload();
         }
     });
 }
