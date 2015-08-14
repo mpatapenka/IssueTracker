@@ -4,28 +4,34 @@
 
 <tiles:insertDefinition name="hftemplate">
     <tiles:putAttribute name="content">
-        <div class="content-header">
-            System Dashboard
-        </div>
         <security:authorize access="isAnonymous()">
+            <div class="content-header">
+                Preview Dashboard
+            </div>
             <div class="content-layout">
                 <div class="content-panel">
                     <div class="panel-header">
-                        Introdution
+                        Introduction
                     </div>
                     <div class="panel-content">
-                        <p>
-                            <strong>Welcome to Issue Tracker</strong>
-                        </p>
-
-                        <p>
-                            Please sign in.
-                        </p>
+                        <p><strong>Welcome to Issue Tracker</strong></p>
+                        <p>Please sign in.</p>
+                    </div>
+                </div>
+                <div class="content-panel">
+                    <div class="panel-header">
+                        Additional info
+                    </div>
+                    <div class="panel-content">
+                        <p>If you don't have an account, please contact your administrator.</p>
                     </div>
                 </div>
             </div>
         </security:authorize>
-        <security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
+        <security:authorize access="hasRole('ROLE_USER')">
+            <div class="content-header">
+                System Dashboard
+            </div>
             <div class="content-layout">
                 <div class="content-panel">
                     <div class="panel-header">
@@ -39,7 +45,7 @@
                                     ${activity.date}
                             </div>
                         </c:forEach>
-                        <a id="show-more-btn" href="/user/dashboard/activity" class="button show-more-btn">
+                        <a id="show-more-btn" href="/dashboard/activity" class="button show-more-btn">
                             <span class="btn-panel">Show more...</span>
                         </a>
                     </div>
@@ -49,26 +55,25 @@
                         Assigned to Me
                     </div>
                     <div class="panel-content">
-                        <table class="table table-condensed table-hover">
-                            <c:if test="${not empty assignToMe}">
+                        <c:if test="${empty assignToMe}">
+                            <p>You currently have no <a href="/issues">issues</a> assigned to you. Enjoy your day!</p>
+                        </c:if>
+                        <c:if test="${not empty assignToMe}">
+                            <table class="table table-condensed table-hover">
                                 <thead>
                                     <td>Key</td>
                                     <td>Summary</td>
                                 </thead>
-                            </c:if>
-                            <c:if test="${empty assignToMe}">
-                                <tr>
-                                    <td colspan="2" align="center"><a href="#">No one</a></td>
-                                </tr>
-                            </c:if>
-                            <c:forEach var="assign" items="${assignToMe}">
-                                <tr>
-                                    <td><a href="/projects?id=${assign.task.project.id}">${assign.task.project.name}</a>
-                                    </td>
-                                    <td><a href="#">${assign.task.description}</a></td>
-                                </tr>
-                            </c:forEach>
-                        </table>
+                                <c:forEach var="assign" items="${assignToMe}">
+                                    <tr>
+                                        <td>
+                                            <a href="/projects?id=${assign.task.project.id}">${assign.task.project.name}</a>
+                                        </td>
+                                        <td><a href="#">${assign.task.description}</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                        </c:if>
                     </div>
                 </div>
             </div>
