@@ -38,8 +38,4 @@
         <put-attribute name="content" value="/WEB-INF/views/jsp/projects.jsp"/>
     </definition>
 
-    <definition name="projectform" extends="hftemplate">
-        <put-attribute name="content" value="/WEB-INF/views/jsp/projectform.jsp"/>
-    </definition>
-
 </tiles-definitions>
