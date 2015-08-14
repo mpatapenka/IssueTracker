@@ -10,7 +10,7 @@
                 </div>
                 <p>Sorry, the requested resource is not found.</p>
                 <div class="login-panel-footer">
-                    Back to start page? <a href="/">Dashboard</a>.
+                    Back to start page? <a href="/">Go home</a>.
                 </div>
             </div>
         </div>
