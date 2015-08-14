@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
-@RequestMapping(value = "/user")
 public class UserController {
 
     @Autowired
@@ -31,12 +30,12 @@ public class UserController {
     @Autowired
     private ActivityService activityService;
 
-    @PreAuthorize(SecurityConstants.IS_AUTHENTICATED)
+    @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public String showDashboard(Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-
         Employee user = employeeService.findByLogin(username);
+
         Set<Member> members = user.getMembers();
         List<Assigment> assignToMe = new ArrayList<>();
         for (Member member : members) {
@@ -51,12 +50,18 @@ public class UserController {
         return "dashboard";
     }
 
-    @PreAuthorize(SecurityConstants.IS_AUTHENTICATED)
+    @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
     @ResponseBody
     @RequestMapping(value = "/dashboard/activity", method = RequestMethod.GET)
     public String getActivities(@RequestParam int offset) {
         List<Activity> activities = activityService.listLast(offset);
         return activityService.convertToJson(activities);
+    }
+
+    @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
+    @RequestMapping(value = "/issues", method = RequestMethod.GET, params = "create")
+    public String createIssue(Model model) {
+        return "";
     }
 
 }
