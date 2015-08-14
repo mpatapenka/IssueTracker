@@ -14,4 +14,6 @@ public interface EmployeeService {
 
     List<Employee> list();
 
+    List<Employee> listAllowed();
+
 }

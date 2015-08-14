@@ -50,4 +50,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDAO.list();
     }
 
+    @Override
+    @Transactional
+    public List<Employee> listAllowed() {
+        return employeeDAO.listAllowed();
+    }
+
 }

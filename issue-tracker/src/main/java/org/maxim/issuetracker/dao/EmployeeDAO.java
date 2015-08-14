@@ -16,4 +16,6 @@ public interface EmployeeDAO {
 
     List<Employee> list();
 
+    List<Employee> listAllowed();
+
 }

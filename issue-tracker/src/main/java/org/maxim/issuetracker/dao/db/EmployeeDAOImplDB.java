@@ -3,6 +3,7 @@ package org.maxim.issuetracker.dao.db;
 import org.hibernate.SessionFactory;
 import org.maxim.issuetracker.dao.EmployeeDAO;
 import org.maxim.issuetracker.domain.Employee;
+import org.maxim.issuetracker.security.SecurityConstants;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -49,6 +50,12 @@ public class EmployeeDAOImplDB extends AbstractDAOHelperDB implements EmployeeDA
     @Override
     public List<Employee> list() {
         return currentSession().createQuery("from Employee").list();
+    }
+
+    @Override
+    public List<Employee> listAllowed() {
+        return currentSession().createQuery("from Employee where position.name!=:pos")
+                .setParameter("pos", SecurityConstants.ADMIN_POSITION).list();
     }
 
 }
