@@ -1,5 +1,6 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <tiles:insertDefinition name="hftemplate">
@@ -14,13 +15,13 @@
                 </div>
                 <div class="panel-content">
                     <p>
-                        <a class="button nav-button menu-item nav-link" href="/admin/register" role="button">Create
+                        <a class="button nav-button menu-item nav-link" href="/register" role="button">Create
                             new user</a>
                     </p>
 
                     <p>
-                        <a class="button nav-button menu-item nav-link" href="/projects?new" role="button">Create
-                            new project</a>
+                        <a class="button nav-button menu-item nav-link" href="#projectModal" data-toggle="modal"
+                           role="button">Create new project</a>
                     </p>
                 </div>
             </div>
@@ -41,6 +42,33 @@
                             </tr>
                         </c:forEach>
                     </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="projectModal" tabindex="-1" role="dialog"
+             aria-labelledby="projectModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Create new project</h4>
+                    </div>
+                    <div class="modal-body">
+                        <sf:form method="post" id="newProjectForm" modelAttribute="newProject">
+                            <sf:input class="project-form-item insertBefore" placeholder="Project name" path="name"/>
+                            <sf:textarea class="project-form-item project-form-textarea" placeholder="Description"
+                                         path="description"/>
+                        </sf:form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                        </button>
+                        <button type="button" class="btn btn-success"
+                                onclick="projectAdd()">Add
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
