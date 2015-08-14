@@ -208,7 +208,7 @@ html, body {
 
 .alert-fix {
     margin-bottom: 0;
-    height: 40px;
+    min-height: 40px;
     font-size: 14px;
     line-height: 30px;
     padding: 4px 30px 4px 10px;
