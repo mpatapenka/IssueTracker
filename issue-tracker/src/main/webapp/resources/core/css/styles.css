@@ -219,3 +219,7 @@ html, body {
     border-color: #BF5B5B;
     color: #BF5B5B;
 }
+
+.export-btn {
+    float: right;
+}
