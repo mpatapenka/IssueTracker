@@ -1,12 +1,11 @@
 package org.maxim.issuetracker.web;
 
-import org.maxim.issuetracker.domain.Activity;
-import org.maxim.issuetracker.domain.Assigment;
-import org.maxim.issuetracker.domain.Employee;
-import org.maxim.issuetracker.domain.Member;
+import org.maxim.issuetracker.domain.*;
 import org.maxim.issuetracker.security.SecurityConstants;
 import org.maxim.issuetracker.service.ActivityService;
+import org.maxim.issuetracker.service.AssigmentService;
 import org.maxim.issuetracker.service.EmployeeService;
+import org.maxim.issuetracker.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,6 +28,12 @@ public class UserController {
 
     @Autowired
     private ActivityService activityService;
+
+    @Autowired
+    private ProjectService projectService;
+
+    @Autowired
+    private AssigmentService assigmentService;
 
     @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
@@ -58,10 +63,18 @@ public class UserController {
         return activityService.convertToJson(activities);
     }
 
-    @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
-    @RequestMapping(value = "/issues", method = RequestMethod.GET, params = "create")
-    public String createIssue(Model model) {
-        return "";
+    @ResponseBody
+    @RequestMapping(value = "/employees", method = RequestMethod.POST, params = "project")
+    public String getProjectEmployees(@RequestParam(value = "project") int id) {
+        Project project = projectService.get(id);
+        return projectService.getProjectMembersWithJson(project);
+    }
+
+    @RequestMapping(value = "/issues", method = RequestMethod.GET, params = "id")
+    public String createIssue(@RequestParam int id, Model model) {
+        Assigment assigment = assigmentService.get(id);
+        model.addAttribute("assign", assigment);
+        return "issues";
     }
 
 }
