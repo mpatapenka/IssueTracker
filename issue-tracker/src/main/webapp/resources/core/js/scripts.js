@@ -117,3 +117,31 @@ function projectAdd() {
         }
     });
 }
+
+function loadEmployees(element) {
+    var id = element.options[element.selectedIndex].value;
+    if (id == -1) {
+        return;
+    }
+    $.ajax({
+        url: "/employees?project=" + id,
+        contentType: "application/json",
+        dataType: "json",
+        type: "POST",
+        success: function (json) {
+            $('#projMembers').find('option').remove().end();
+
+            var str = '<option value="-1">Assignee</option>';
+            if (json.length == 0) {
+                str += '<option value="-2">No one</option>';
+            }
+            for (var i = 0; i < json.length; i++) {
+                str += '<option value="' + json[i]['id'] + '">' + json[i]['name'] + '</option>';
+            }
+            $('#projMembers').append(str);
+        },
+        error: function () {
+            location.reload();
+        }
+    });
+}
