@@ -12,4 +12,6 @@ public interface ProjectService {
 
     List<Project> list();
 
+    String getProjectMembersWithJson(Project project);
+
 }
