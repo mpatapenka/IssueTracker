@@ -32,8 +32,12 @@
                 </ul>
             </li>
             <li class="menu-item">
-                <a href="#" class="nav-link">Issues</a>
+                <a href="/issues" class="nav-link">Issues</a>
             </li>
+            <li class="button nav-button menu-item"><a href="#issueModal" data-toggle="modal" class="nav-link">Create
+                Issue</a></li>
+        </security:authorize>
+        <security:authorize access="hasRole('ROLE_LEAD')">
             <li class="button nav-button menu-item"><a href="#issueModal" data-toggle="modal" class="nav-link">Create
                 Issue</a></li>
         </security:authorize>
@@ -63,22 +67,27 @@
                     <h4 class="modal-title" id="myModalLabel">Create issue</h4>
                 </div>
                 <div class="modal-body">
-                    <sf:form method="post" id="issueForm" modelAttribute="task">
-                        <sf:select class="project-form-item insertBefore" path="project.id">
+                    <sf:form method="post" id="issueForm" modelAttribute="newAssign">
+                        <sf:select class="project-form-item insertBefore" path="member.project.id" onchange="loadEmployees(this)">
                             <sf:option value="-1">Project</sf:option>
-                            <c:forEach var="proj" items="${projects}">
+                            <c:forEach var="proj" items="${allProjects}">
                                 <sf:option value="${proj.id}">
                                     ${proj.name}
                                 </sf:option>
                             </c:forEach>
                         </sf:select>
+                        <sf:select id="projMembers" class="project-form-item" path="member.employee.id">
+                            <sf:option cssClass="insertAfter" value="-1">Assignee</sf:option>
+                        </sf:select>
+                        <sf:textarea class="project-form-item project-form-textarea" placeholder="Description"
+                                     path="description"/>
                     </sf:form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
                     </button>
                     <button type="button" class="btn btn-success"
-                            onclick="">Add
+                            onclick="">Create
                     </button>
                 </div>
             </div>
