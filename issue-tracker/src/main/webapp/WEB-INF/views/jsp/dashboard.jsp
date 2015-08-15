@@ -69,7 +69,7 @@
                                         <td>
                                             <a href="/projects?id=${assign.task.project.id}">${assign.task.project.name}</a>
                                         </td>
-                                        <td><a href="#">${assign.task.description}</a></td>
+                                        <td><a href="/issues?id=${assign.task.id}">${assign.task.description}</a></td>
                                     </tr>
                                 </c:forEach>
                             </table>
