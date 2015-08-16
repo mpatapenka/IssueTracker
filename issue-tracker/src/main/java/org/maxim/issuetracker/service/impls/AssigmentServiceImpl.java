@@ -14,6 +14,11 @@ public class AssigmentServiceImpl implements AssigmentService {
     private AssigmentDAO assigmentDAO;
 
     @Override
+    public void add(Assigment assigment) {
+        assigmentDAO.save(assigment);
+    }
+
+    @Override
     @Transactional
     public Assigment get(int id) {
         return assigmentDAO.findById(id);
