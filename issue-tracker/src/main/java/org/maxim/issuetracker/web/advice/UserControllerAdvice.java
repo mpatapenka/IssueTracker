@@ -1,5 +1,6 @@
 package org.maxim.issuetracker.web.advice;
 
+import org.maxim.issuetracker.domain.Activity;
 import org.maxim.issuetracker.domain.Assigment;
 import org.maxim.issuetracker.domain.Employee;
 import org.maxim.issuetracker.service.EmployeeService;
@@ -32,6 +33,7 @@ public class UserControllerAdvice {
     @ModelAttribute
     public void addFormData(Model model) {
         model.addAttribute("newAssign", new Assigment());
+        model.addAttribute("newReport", new Activity());
         model.addAttribute("allProjects", projectService.list());
     }
 
