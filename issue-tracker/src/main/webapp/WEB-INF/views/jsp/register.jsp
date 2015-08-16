@@ -40,7 +40,7 @@
                     <input type="submit" class="login-button" value="Sign up">
                 </sf:form>
                 <div class="login-panel-footer">
-                    Back to start page? <a href="/">Go home</a>.
+                    Back to start page? <a href="<c:url value="/"/>">Go home</a>.
                 </div>
             </div>
         </div>
