@@ -7,8 +7,8 @@ import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -32,20 +32,19 @@ public class Activity implements Serializable {
     @Size(max = ValidationConstants.TEXT_MAX_SIZE)
     private String comment;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "memberid", nullable = false)
     @JsonBackReference
     private Member member;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "assigmentid", nullable = false)
     @JsonBackReference
     private Assigment assigment;
 
+    @XmlTransient
     public int getId() {
         return id;
     }
