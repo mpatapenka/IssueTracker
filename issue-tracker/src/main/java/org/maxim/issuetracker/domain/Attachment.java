@@ -7,6 +7,7 @@ import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
 @Entity
@@ -43,6 +44,7 @@ public class Attachment implements Serializable {
     @JsonBackReference
     private Task task;
 
+    @XmlTransient
     public int getId() {
         return id;
     }
