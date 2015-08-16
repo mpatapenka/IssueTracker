@@ -96,7 +96,7 @@ function projectAdd() {
         type: "POST",
         success: function (result) {
             if (result != "") {
-                result = result.replace('\n', '<br>');
+                result = result.split('\n').join('<br>');
                 var element = $('.insertBefore');
                 var strDiv = '<div id="insertedError" class="alert alert-danger alert-dismissible alert-fix alert-danger-fix" role="alert">' +
                     '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
@@ -104,6 +104,35 @@ function projectAdd() {
                 var insElem = $(strDiv);
                 var parent = document.getElementById("newProjectForm");
                 var test = document.getElementById("insertedError");
+                if (test != null) {
+                    parent.removeChild(test);
+                }
+                insElem.insertBefore(element);
+            } else {
+                location.reload();
+            }
+        },
+        error: function () {
+            location.reload();
+        }
+    });
+}
+
+function reportIssue(id) {
+    $.ajax({
+        url: "/issues?id=" + id + "&report",
+        data: $('#reportForm').serialize(),
+        type: "POST",
+        success: function (result) {
+            if (result != "") {
+                result = result.split('\n').join('<br>');
+                var element = $('.insertBeforeReportForm');
+                var strDiv = '<div id="insertedErrorReport" class="alert alert-danger alert-dismissible alert-fix alert-danger-fix" role="alert">' +
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                    '<span aria-hidden="true">&times;</span></button>' + result + '</div>';
+                var insElem = $(strDiv);
+                var parent = document.getElementById("reportForm");
+                var test = document.getElementById("insertedErrorReport");
                 if (test != null) {
                     parent.removeChild(test);
                 }
