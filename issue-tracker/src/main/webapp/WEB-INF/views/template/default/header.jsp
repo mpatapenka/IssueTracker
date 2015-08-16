@@ -7,17 +7,17 @@
     <ul class="navigation">
         <security:authorize access="isAnonymous()">
             <li class="menu-item">
-                <a href="/" class="nav-link">Preview dashboard</a>
+                <a href="<c:url value="/"/>" class="nav-link">Preview dashboard</a>
             </li>
         </security:authorize>
         <security:authorize access="hasRole('ROLE_ADMIN')">
             <li class="menu-item">
-                <a href="/" class="nav-link">Admin panel</a>
+                <a href="<c:url value="/"/>" class="nav-link">Admin panel</a>
             </li>
         </security:authorize>
         <security:authorize access="hasRole('ROLE_USER')">
             <li class="menu-item">
-                <a href="/" class="nav-link">Dashboard</a>
+                <a href="<c:url value="/"/>" class="nav-link">Dashboard</a>
             </li>
             <li class="dropdown menu-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -27,12 +27,12 @@
                         <li><a href="#">No projects for me</a></li>
                     </c:if>
                     <c:forEach var="member" items="${members}">
-                        <li><a href="/projects?id=${member.project.id}">${member.project.name}</a></li>
+                        <li><a href="<c:url value="/projects?id=${member.project.id}"/>">${member.project.name}</a></li>
                     </c:forEach>
                 </ul>
             </li>
             <li class="menu-item">
-                <a href="/issues" class="nav-link">Issues</a>
+                <a href="<c:url value="/issues?search"/>" class="nav-link">Issues</a>
             </li>
             <li class="button nav-button menu-item"><a href="#issueModal" data-toggle="modal" class="nav-link">Create
                 Issue</a></li>
@@ -46,12 +46,12 @@
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
                    aria-expanded="true">${user}<span class="caret"></span></a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="/j_spring_security_logout">Log out</a></li>
+                    <li><a href="<c:url value="/j_spring_security_logout"/>">Log out</a></li>
                 </ul>
             </li>
         </security:authorize>
         <security:authorize access="isAnonymous()">
-            <li class="account-button menu-item"><a href="/login" class="nav-link">Sign In</a></li>
+            <li class="account-button menu-item"><a href="<c:url value="/login"/>" class="nav-link">Sign In</a></li>
         </security:authorize>
     </ul>
 </div>
