@@ -54,7 +54,7 @@
     </ul>
 </div>
 
-<security:authorize access="hasRole('ROLE_USER')">
+<security:authorize access="hasRole('ROLE_LEAD')">
     <div class="modal fade" id="issueModal" tabindex="-1" role="dialog"
          aria-labelledby="issueModalLabel">
         <div class="modal-dialog" role="document">
@@ -66,7 +66,8 @@
                 </div>
                 <div class="modal-body">
                     <sf:form method="post" id="issueForm" modelAttribute="newAssign">
-                        <sf:select class="project-form-item insertBefore" path="member.project.id" onchange="loadEmployees(this)">
+                        <sf:select class="project-form-item insertBeforeIssueForm" path="member.project.id"
+                                   onchange="loadEmployees(this)">
                             <sf:option value="-1">Project</sf:option>
                             <c:forEach var="proj" items="${allProjects}">
                                 <sf:option value="${proj.id}">
@@ -74,18 +75,20 @@
                                 </sf:option>
                             </c:forEach>
                         </sf:select>
-                        <sf:select id="projMembers" class="project-form-item" path="member.employee.id">
+                        <sf:select id="projMembers" class="project-form-item" path="member.id">
                             <sf:option cssClass="insertAfter" value="-1">Assignee</sf:option>
                         </sf:select>
+                        <sf:input id="psd" class="project-form-item datepicker" path="task.planStartDate" placeholder="Plan start date"/>
+                        <sf:input id="ped" class="project-form-item datepicker" path="task.planEndDate" placeholder="Plan end date"/>
                         <sf:textarea class="project-form-item project-form-textarea" placeholder="Description"
-                                     path="description"/>
+                                     path="task.description"/>
                     </sf:form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
                     </button>
                     <button type="button" class="btn btn-success"
-                            onclick="">Create
+                            onclick="createIssue()">Create
                     </button>
                 </div>
             </div>
