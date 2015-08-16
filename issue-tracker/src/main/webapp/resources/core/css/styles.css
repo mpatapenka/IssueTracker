@@ -223,3 +223,10 @@ html, body {
 .export-btn {
     float: right;
 }
+
+.scrollable-panel-content {
+    margin: 0;
+    padding: 0;
+    max-height: 390px;
+    overflow: auto;
+}
