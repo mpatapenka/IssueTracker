@@ -15,10 +15,9 @@
                 </div>
                 <div class="panel-content">
                     <p>
-                        <a class="button nav-button menu-item nav-link" href="/register" role="button">Create
+                        <a class="button nav-button menu-item nav-link" href="<c:url value="/register"/>" role="button">Create
                             new user</a>
                     </p>
-
                     <p>
                         <a class="button nav-button menu-item nav-link" href="#projectModal" data-toggle="modal"
                            role="button">Create new project</a>
@@ -37,7 +36,7 @@
                         </thead>
                         <c:forEach var="project" items="${allProjects}">
                             <tr>
-                                <td><a href="/projects?id=${project.id}">${project.name}</a></td>
+                                <td><a href="<c:url value="/projects?id=${project.id}"/>">${project.name}</a></td>
                                 <td><a href="#">${project.description}</a></td>
                             </tr>
                         </c:forEach>
