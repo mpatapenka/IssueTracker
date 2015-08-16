@@ -147,6 +147,35 @@ function reportIssue(id) {
     });
 }
 
+function createIssue() {
+    $.ajax({
+        url: "/issues?create",
+        data: $('#issueForm').serialize(),
+        type: "POST",
+        success: function (result) {
+            if (result != "") {
+                result = result.split('\n').join('<br>');
+                var element = $('.insertBeforeIssueForm');
+                var strDiv = '<div id="insertedErrorIssue" class="alert alert-danger alert-dismissible alert-fix alert-danger-fix" role="alert">' +
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                    '<span aria-hidden="true">&times;</span></button>' + result + '</div>';
+                var insElem = $(strDiv);
+                var parent = document.getElementById("issueForm");
+                var test = document.getElementById("insertedErrorIssue");
+                if (test != null) {
+                    parent.removeChild(test);
+                }
+                insElem.insertBefore(element);
+            } else {
+                location.reload();
+            }
+        },
+        error: function () {
+            location.reload();
+        }
+    });
+}
+
 function loadEmployees(element) {
     var id = element.options[element.selectedIndex].value;
     if (id == -1) {
@@ -174,3 +203,11 @@ function loadEmployees(element) {
         }
     });
 }
+
+$(function () {
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        weekStart: 1,
+        autoclose: true
+    });
+});
