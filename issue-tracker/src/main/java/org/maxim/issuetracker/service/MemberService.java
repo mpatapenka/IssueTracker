@@ -8,6 +8,8 @@ public interface MemberService {
 
     void add(Member member);
 
+    Member get(int id);
+
     List<Member> list();
 
 }

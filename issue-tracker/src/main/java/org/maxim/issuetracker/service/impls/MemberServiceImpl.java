@@ -26,6 +26,12 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
+    public Member get(int id) {
+        return memberDAO.findById(id);
+    }
+
+    @Override
+    @Transactional
     public List<Member> list() {
         return memberDAO.list();
     }
