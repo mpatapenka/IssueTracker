@@ -6,6 +6,7 @@ import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -41,6 +42,7 @@ public class Project implements Serializable {
     @JsonManagedReference
     private Set<Attachment> attachments = new HashSet<>();
 
+    @XmlTransient
     public int getId() {
         return id;
     }
@@ -65,6 +67,7 @@ public class Project implements Serializable {
         this.description = description;
     }
 
+    @XmlTransient
     public Set<Member> getMembers() {
         return members;
     }
@@ -73,6 +76,7 @@ public class Project implements Serializable {
         this.members = members;
     }
 
+    @XmlTransient
     public Set<Task> getTasks() {
         return tasks;
     }
@@ -81,6 +85,7 @@ public class Project implements Serializable {
         this.tasks = tasks;
     }
 
+    @XmlTransient
     public Set<Attachment> getAttachments() {
         return attachments;
     }
