@@ -191,7 +191,7 @@ function loadEmployees(element) {
 
             var str = '<option value="-1">Assignee</option>';
             if (json.length == 0) {
-                str += '<option value="-2">No one</option>';
+                str = '<option value="-2">Unassigned</option>';
             }
             for (var i = 0; i < json.length; i++) {
                 str += '<option value="' + json[i]['id'] + '">' + json[i]['name'] + '</option>';
