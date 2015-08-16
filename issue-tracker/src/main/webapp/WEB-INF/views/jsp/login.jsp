@@ -32,7 +32,7 @@
                     <input type="submit" class="login-button" value="Sign in">
                 </form>
                 <div class="login-panel-footer">
-                    Back to start page? <a href="/">Dashboard</a>.
+                    Back to start page? <a href="<c:url value="/"/>">Dashboard</a>.
                 </div>
             </div>
         </div>
