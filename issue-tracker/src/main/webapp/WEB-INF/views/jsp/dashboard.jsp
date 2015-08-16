@@ -56,28 +56,30 @@
                         Assigned to Me
                     </div>
                     <div class="panel-content">
-                        <c:if test="${empty assignToMe}">
-                            <p>You currently have no <a href="<c:url value="/issues"/>">issues</a> assigned to you.
-                                Enjoy your day!</p>
-                        </c:if>
-                        <c:if test="${not empty assignToMe}">
-                            <table class="table table-condensed table-hover">
-                                <thead>
+                        <div class="scrollable-panel-content">
+                            <c:if test="${empty assignToMe}">
+                                <p>You currently have no <a href="<c:url value="/issues"/>">issues</a> assigned to you.
+                                    Enjoy your day!</p>
+                            </c:if>
+                            <c:if test="${not empty assignToMe}">
+                                <table class="table table-condensed table-hover">
+                                    <thead>
                                     <td>Key</td>
                                     <td>Summary</td>
-                                </thead>
-                                <c:forEach var="assign" items="${assignToMe}">
-                                    <tr>
-                                        <td>
-                                            <a href="<c:url value="/projects?id=${assign.task.project.id}"/>">${assign.task.project.name}</a>
-                                        </td>
-                                        <td>
-                                            <a href="<c:url value="/issues?id=${assign.task.id}"/>">${assign.task.description}</a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </table>
-                        </c:if>
+                                    </thead>
+                                    <c:forEach var="assign" items="${assignToMe}">
+                                        <tr>
+                                            <td>
+                                                <a href="<c:url value="/projects?id=${assign.task.project.id}"/>">${assign.task.project.name}</a>
+                                            </td>
+                                            <td>
+                                                <a href="<c:url value="/issues?id=${assign.task.id}"/>">${assign.task.description}</a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
+                            </c:if>
+                        </div>
                     </div>
                 </div>
             </div>
