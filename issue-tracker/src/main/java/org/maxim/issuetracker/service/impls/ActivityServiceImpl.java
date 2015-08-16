@@ -23,6 +23,12 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     @Transactional
+    public void add(Activity activity) {
+        activityDAO.save(activity);
+    }
+
+    @Override
+    @Transactional
     public List<Activity> list() {
         return activityDAO.list();
     }

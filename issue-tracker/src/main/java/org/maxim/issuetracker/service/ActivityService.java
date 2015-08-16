@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface ActivityService {
 
+    void add(Activity activity);
+
     List<Activity> list();
 
     List<Activity> listLast(int offset);
