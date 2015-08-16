@@ -8,9 +8,12 @@ public final class SecurityConstants {
     public static final String ROLE_ANONYMOUS = "ROLE_ANONYMOUS";
 
     public static final String ADMIN_POSITION = "Admin";
+    public static final String TEAM_LEAD_POSITION = "Team lead";
+    public static final String PROJECT_MANAGER_POSITION = "Project manager";
 
     public static final String HAS_ROLE_ADMIN = "hasRole('" + ROLE_ADMIN + "')";
     public static final String HAS_ROLE_USER = "hasRole('" + ROLE_USER + "')";
+    public static final String HAS_ROLE_LEAD = "hasRole('" + ROLE_LEAD + "')";
     public static final String IS_AUTHENTICATED = "isAuthenticated()";
     public static final String IS_ANONYMOUS = "isAnonymous()";
 
