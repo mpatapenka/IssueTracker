@@ -37,13 +37,15 @@
                     Activity
                 </div>
                 <div class="panel-content">
-                    <c:forEach items="${assign.activities}" var="activity">
-                        <div class="activity-item">
-                            <strong>${activity.member.employee.firstName} ${activity.member.employee.lastName}</strong>
-                                ${activity.comment}<br>
-                                ${activity.date} - ${activity.duration} min
-                        </div>
-                    </c:forEach>
+                    <div class="scrollable-panel-content">
+                        <c:forEach items="${assign.activities}" var="activity">
+                            <div class="activity-item">
+                                <strong>${activity.member.employee.firstName} ${activity.member.employee.lastName}</strong>
+                                    ${activity.comment}<br>
+                                    ${activity.date} - ${activity.duration} min
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
             </div>
         </div>
