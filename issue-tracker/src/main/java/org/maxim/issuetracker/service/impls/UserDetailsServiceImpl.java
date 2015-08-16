@@ -36,9 +36,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private List<GrantedAuthority> extractServerRole(final Position position) {
         List<GrantedAuthority> auth = new ArrayList<>();
-        if (SecurityConstants.ADMIN_POSITION.equals(position.getName())) {
+        String pos = position.getName();
+        if (SecurityConstants.ADMIN_POSITION.equals(pos)) {
             auth.add(new SimpleGrantedAuthority(SecurityConstants.ROLE_ADMIN));
         } else {
+            if (SecurityConstants.TEAM_LEAD_POSITION.equals(pos)
+                    || SecurityConstants.PROJECT_MANAGER_POSITION.equals(pos)) {
+                auth.add(new SimpleGrantedAuthority(SecurityConstants.ROLE_LEAD));
+            }
             auth.add(new SimpleGrantedAuthority(SecurityConstants.ROLE_USER));
         }
         return auth;
