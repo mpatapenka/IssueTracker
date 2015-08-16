@@ -2,10 +2,7 @@ package org.maxim.issuetracker.web;
 
 import org.maxim.issuetracker.domain.*;
 import org.maxim.issuetracker.security.SecurityConstants;
-import org.maxim.issuetracker.service.ActivityService;
-import org.maxim.issuetracker.service.AssigmentService;
-import org.maxim.issuetracker.service.EmployeeService;
-import org.maxim.issuetracker.service.ProjectService;
+import org.maxim.issuetracker.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,6 +36,15 @@ public class UserController {
 
     @Autowired
     private AssigmentService assigmentService;
+
+    @Autowired
+    private TaskService taskService;
+
+    @Autowired
+    private MemberService memberService;
+
+    @Autowired
+    private StatusService statusService;
 
     @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
@@ -76,9 +82,40 @@ public class UserController {
         return projectService.getProjectMembersWithJson(project);
     }
 
+    @PreAuthorize(SecurityConstants.HAS_ROLE_LEAD)
+    @ResponseBody
+    @RequestMapping(value = "/issues", method = RequestMethod.POST, params = "create")
+    public String createIssue(Assigment assigment) {
+        int memberId = assigment.getMember().getId();
+        int projectId = assigment.getMember().getProject().getId();
+
+        Project project = projectService.get(projectId);
+        if (project == null) {
+            return "Check your input data and try again.";
+        }
+
+        Task task = assigment.getTask();
+        task.setProject(project);
+
+        Status initialStatus = statusService.getInitial();
+        task.setStatus(initialStatus);
+
+        Member member = memberService.get(memberId);
+        if (member != null) {
+            assigment.setMember(member);
+            assigment.setTask(task);
+            assigmentService.add(assigment);
+            System.out.println("member");
+        } else {
+            taskService.add(task);
+            System.out.println("task");
+        }
+        return "";
+    }
+
     @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
     @RequestMapping(value = "/issues", method = RequestMethod.GET, params = "id")
-    public String createIssue(@RequestParam int id, Model model) {
+    public String showIssue(@RequestParam int id, Model model) {
         Assigment assigment = assigmentService.get(id);
         model.addAttribute("assign", assigment);
         return "issues";
