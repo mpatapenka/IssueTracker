@@ -15,6 +15,7 @@
                     </div>
                     <div class="panel-content">
                         <p><strong>Welcome to Issue Tracker</strong></p>
+
                         <p>Please sign in.</p>
                     </div>
                 </div>
@@ -45,7 +46,7 @@
                                     ${activity.date}
                             </div>
                         </c:forEach>
-                        <a id="show-more-btn" href="/dashboard/activity" class="button show-more-btn">
+                        <a id="show-more-btn" href="<c:url value="/dashboard/activity"/>" class="button show-more-btn">
                             <span class="btn-panel">Show more...</span>
                         </a>
                     </div>
@@ -56,7 +57,8 @@
                     </div>
                     <div class="panel-content">
                         <c:if test="${empty assignToMe}">
-                            <p>You currently have no <a href="/issues">issues</a> assigned to you. Enjoy your day!</p>
+                            <p>You currently have no <a href="<c:url value="/issues"/>">issues</a> assigned to you.
+                                Enjoy your day!</p>
                         </c:if>
                         <c:if test="${not empty assignToMe}">
                             <table class="table table-condensed table-hover">
@@ -67,9 +69,11 @@
                                 <c:forEach var="assign" items="${assignToMe}">
                                     <tr>
                                         <td>
-                                            <a href="/projects?id=${assign.task.project.id}">${assign.task.project.name}</a>
+                                            <a href="<c:url value="/projects?id=${assign.task.project.id}"/>">${assign.task.project.name}</a>
                                         </td>
-                                        <td><a href="/issues?id=${assign.task.id}">${assign.task.description}</a></td>
+                                        <td>
+                                            <a href="<c:url value="/issues?id=${assign.task.id}"/>">${assign.task.description}</a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </table>
