@@ -23,6 +23,7 @@
 
     <script src="<c:url value="/resources/core/js/jquery-1.11.3.min.js"/>"></script>
     <script src="<c:url value="/resources/core/js/bootstrap.min.js"/>"></script>
+    <script src="<c:url value="/resources/core/js/bootstrap-datepicker.min.js"/>"></script>
     <script src="<c:url value="/resources/core/js/scripts.js"/>"></script>
 </body>
 </html>
