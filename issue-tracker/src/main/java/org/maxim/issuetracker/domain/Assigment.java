@@ -23,15 +23,13 @@ public class Assigment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @Cascade(CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "memberid", nullable = false)
     @JsonBackReference
     private Member member;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "taskid", nullable = false)
     @JsonBackReference
@@ -92,18 +90,20 @@ public class Assigment implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Assigment assigment = (Assigment) o;
-        if (id != assigment.id) return false;
+
         if (member != null ? !member.equals(assigment.member) : assigment.member != null) return false;
         if (task != null ? !task.equals(assigment.task) : assigment.task != null) return false;
-        if (description != null ? !description.equals(assigment.description) : assigment.description != null)
-            return false;
-        return !(activities != null ? !activities.equals(assigment.activities) : assigment.activities != null);
+        return !(description != null ? !description.equals(assigment.description) : assigment.description != null);
     }
 
     @Override
     public int hashCode() {
-        return id;
+        int result = member != null ? member.hashCode() : 0;
+        result = 31 * result + (task != null ? task.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        return result;
     }
 
     @Override
