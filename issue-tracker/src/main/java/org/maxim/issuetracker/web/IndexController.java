@@ -1,14 +1,15 @@
 package org.maxim.issuetracker.web;
 
+import org.maxim.issuetracker.domain.Assigment;
 import org.maxim.issuetracker.domain.Member;
 import org.maxim.issuetracker.domain.Project;
+import org.maxim.issuetracker.domain.Task;
 import org.maxim.issuetracker.security.SecurityConstants;
 import org.maxim.issuetracker.service.EmployeeService;
 import org.maxim.issuetracker.service.ProjectService;
 import org.maxim.issuetracker.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 public class IndexController {
@@ -33,8 +37,7 @@ public class IndexController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showMain() {
-        Collection<? extends GrantedAuthority> auth = SecurityContextHolder
-                .getContext()
+        Collection auth = SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getAuthorities();
 
@@ -66,10 +69,20 @@ public class IndexController {
     @RequestMapping(value = "/projects", method = RequestMethod.GET, params = "id")
     public String showProject(@RequestParam int id, Model model) {
         Project project = projectService.get(id);
+        Set<Task> tasks = project.getTasks();
+        List<Assigment> assigments = new ArrayList<>();
+        for (Task task : tasks) {
+            if (!task.getAssigments().isEmpty()) {
+                assigments.add(task.getAssigments().iterator().next());
+            }
+        }
+
         model.addAttribute("project", project);
+        model.addAttribute("issues", assigments);
         model.addAttribute("addMember", new Member());
         model.addAttribute("employees", employeeService.listAllowed());
         model.addAttribute("roles", roleService.list());
+
         return "projects";
     }
 
