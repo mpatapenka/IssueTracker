@@ -47,7 +47,8 @@
                                 <div class="activity-item">
                                     <strong>${activity.member.employee.firstName} ${activity.member.employee.lastName}</strong>
                                         ${activity.comment}<br>
-                                        <span class="label label-default">${activity.date}</span> - ${activity.duration} min
+                                        <span class="label label-default">${activity.date}</span> -
+                                        <span class="label label-success">${activity.duration} min</span>
                                 </div>
                             </c:forEach>
                             <c:if test="${lastActivities.size() eq 5}">

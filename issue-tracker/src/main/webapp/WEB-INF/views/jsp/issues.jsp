@@ -1,6 +1,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <tiles:insertDefinition name="hftemplate">
@@ -21,7 +22,9 @@
                 </div>
                 <div class="panel-content">
                     <p>
-                        <a href="#" class="btn btn-default">Assign</a>
+                        <security:authorize access="hasRole('ROLE_LEAD')">
+                            <a href="#reassignModal" data-toggle="modal" class="btn btn-default">Assign</a>
+                        </security:authorize>
                         <a href="#" class="btn btn-default">Start progress</a>
                     </p>
                     <p>Status: <strong>${assign.task.status.name}</strong></p>
@@ -66,7 +69,8 @@
                                 <div class="activity-item">
                                     <strong>${activity.member.employee.firstName} ${activity.member.employee.lastName}</strong>
                                         ${activity.comment}<br>
-                                        <span class="label label-default">${activity.date}</span> - ${activity.duration} min
+                                        <span class="label label-default">${activity.date}</span> -
+                                        <span class="label label-success">${activity.duration} min</span>
                                 </div>
                             </c:forEach>
                         </div>
@@ -101,5 +105,41 @@
                 </div>
             </div>
         </div>
+
+        <security:authorize access="hasRole('ROLE_LEAD')">
+            <div class="modal fade" id="reassignModal" tabindex="-1" role="dialog"
+                 aria-labelledby="reassignModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Assign</h4>
+                        </div>
+                        <div class="modal-body">
+                            <sf:form method="post" id="reassignForm" modelAttribute="reAssign">
+                                <sf:select class="project-form-item insertBeforeReassignForm" path="member.id">
+                                    <sf:option value="-1">Assignee</sf:option>
+                                    <c:forEach var="member" items="${assign.task.project.members}">
+                                        <sf:option value="${member.id}">
+                                            ${member.employee.firstName} ${member.employee.lastName}
+                                        </sf:option>
+                                    </c:forEach>
+                                </sf:select>
+                                <sf:textarea class="project-form-item project-form-textarea" placeholder="Description"
+                                             path="description"/>
+                            </sf:form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                            </button>
+                            <button type="button" class="btn btn-success"
+                                    onclick="reassignIssue(${assign.id})">Assign
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </security:authorize>
     </tiles:putAttribute>
 </tiles:insertDefinition>
