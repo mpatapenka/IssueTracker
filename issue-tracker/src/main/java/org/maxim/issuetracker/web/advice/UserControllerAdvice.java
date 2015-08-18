@@ -5,6 +5,7 @@ import org.maxim.issuetracker.domain.Assigment;
 import org.maxim.issuetracker.domain.Employee;
 import org.maxim.issuetracker.service.EmployeeService;
 import org.maxim.issuetracker.service.ProjectService;
+import org.maxim.issuetracker.web.constants.AttributeConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
@@ -25,16 +26,16 @@ public class UserControllerAdvice {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Employee user = employeeService.findByLogin(username);
         if (user != null) {
-            model.addAttribute("members", user.getMembers());
-            model.addAttribute("user", user.getFirstName() + " " + user.getLastName());
+            model.addAttribute(AttributeConstants.ATTR_MEMBERS, user.getMembers());
+            model.addAttribute(AttributeConstants.ATTR_USER, user.getFirstName() + " " + user.getLastName());
         }
     }
 
     @ModelAttribute
     public void addFormData(Model model) {
-        model.addAttribute("newAssign", new Assigment());
-        model.addAttribute("newReport", new Activity());
-        model.addAttribute("allProjects", projectService.list());
+        model.addAttribute(AttributeConstants.ATTR_NEW_ASSIGN, new Assigment());
+        model.addAttribute(AttributeConstants.ATTR_NEW_REPORT, new Activity());
+        model.addAttribute(AttributeConstants.ATTR_ALL_PROJECTS, projectService.list());
     }
 
 }
