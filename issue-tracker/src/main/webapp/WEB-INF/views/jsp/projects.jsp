@@ -15,25 +15,27 @@
                     Tasks
                 </div>
                 <div class="panel-content">
-                    <table class="table table-condensed table-hover">
-                        <c:if test="${not empty project.tasks}">
-                            <thead>
-                                <td>Description</td>
-                                <td>Status</td>
-                            </thead>
-                        </c:if>
-                        <c:if test="${empty project.tasks}">
-                            <tr>
-                                <td colspan="2" align="center"><a href="#">No one</a></td>
-                            </tr>
-                        </c:if>
-                        <c:forEach var="task" items="${project.tasks}">
-                            <tr>
-                                <td><a href="#">${task.description}</a></td>
-                                <td><a href="#">${task.status.name}</a></td>
-                            </tr>
-                        </c:forEach>
-                    </table>
+                    <c:if test="${empty issues}">
+                        <p>On the project still does not have tasks, contact your the leadership.</p>
+                    </c:if>
+                    <c:if test="${not empty issues}">
+                        <table class="table table-condensed table-hover">
+                            <c:if test="${not empty project.tasks}">
+                                <thead>
+                                    <td>Description</td>
+                                    <td>Status</td>
+                                </thead>
+                            </c:if>
+                            <c:forEach var="issue" items="${issues}">
+                                <tr>
+                                    <td>
+                                        <a href="<c:url value="/issues?id=${issue.id}"/>">${issue.task.description}</a>
+                                    </td>
+                                    <td><a href="#">${issue.task.status.name}</a></td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </c:if>
                 </div>
             </div>
             <div class="content-panel">
@@ -49,25 +51,25 @@
                     Project members
                 </div>
                 <div class="panel-content">
-                    <table class="table table-condensed table-hover">
-                        <c:if test="${not empty project.members}">
-                            <thead>
-                                <td>Name</td>
-                                <td>Role</td>
-                            </thead>
-                        </c:if>
-                        <c:if test="${empty project.members}">
-                            <tr>
-                                <td colspan="2" align="center"><a href="#">No one</a></td>
-                            </tr>
-                        </c:if>
-                        <c:forEach var="member" items="${project.members}">
-                            <tr>
-                                <td><a href="#">${member.employee.firstName} ${member.employee.lastName}</a></td>
-                                <td><a href="#">${member.role.name}</a></td>
-                            </tr>
-                        </c:forEach>
-                    </table>
+                    <c:if test="${empty project.members}">
+                        <p>On this project has not yet been assigned to a team, contact the administrator.</p>
+                    </c:if>
+                    <c:if test="${not empty project.members}">
+                        <table class="table table-condensed table-hover">
+                            <c:if test="${not empty project.members}">
+                                <thead>
+                                    <td>Name</td>
+                                    <td>Role</td>
+                                </thead>
+                            </c:if>
+                            <c:forEach var="member" items="${project.members}">
+                                <tr>
+                                    <td><a href="#">${member.employee.firstName} ${member.employee.lastName}</a></td>
+                                    <td><a href="#">${member.role.name}</a></td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </c:if>
                     <security:authorize access="hasRole('ROLE_ADMIN')">
                         <a href="#addModal" class="button" data-toggle="modal">
                             <span class="btn-panel">Add member</span>
