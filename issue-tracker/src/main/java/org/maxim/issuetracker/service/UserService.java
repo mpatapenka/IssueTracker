@@ -14,4 +14,6 @@ public interface UserService {
 
     void reassignIssue(Assigment assigment);
 
+    void transferIssue(int assigmentId, String username, int transferPos);
+
 }
