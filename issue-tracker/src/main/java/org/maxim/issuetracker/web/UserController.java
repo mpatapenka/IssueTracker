@@ -119,6 +119,19 @@ public class UserController {
         }
     }
 
+    @PreAuthorize(SecurityConstants.HAS_ROLE_LEAD)
+    @ResponseBody
+    @RequestMapping(value = MappingConstants.ISSUES, method = RequestMethod.POST,
+            params = {AttributeConstants.PARAM_ID, AttributeConstants.PARAM_REASSIGN})
+    public String reAssignToIssue(Assigment assigment) {
+        try {
+            userService.reassignIssue(assigment);
+            return AttributeConstants.SUCCESS_RESPONSE_BODY;
+        } catch (RuntimeException e) {
+            return e.getMessage();
+        }
+    }
+
     @PreAuthorize(SecurityConstants.IS_AUTHENTICATED)
     @RequestMapping(value = MappingConstants.ISSUES, method = RequestMethod.GET, params = AttributeConstants.PARAM_SEARCH)
     public String showSearchIssues() {
