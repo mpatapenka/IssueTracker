@@ -39,16 +39,21 @@
                         Activity Stream
                     </div>
                     <div class="panel-content activity-panel">
-                        <c:forEach var="activity" items="${lastActivities}">
-                            <div class="activity-item">
-                                <strong>${activity.member.employee.firstName} ${activity.member.employee.lastName}</strong>
-                                    ${activity.comment}<br>
-                                    ${activity.date}
-                            </div>
-                        </c:forEach>
-                        <a id="show-more-btn" href="<c:url value="/dashboard/activity"/>" class="button show-more-btn">
-                            <span class="btn-panel">Show more...</span>
-                        </a>
+                        <c:if test="${empty lastActivities}">
+                            <p>Nope activity recently.</p>
+                        </c:if>
+                        <c:if test="${not empty lastActivities}">
+                            <c:forEach var="activity" items="${lastActivities}">
+                                <div class="activity-item">
+                                    <strong>${activity.member.employee.firstName} ${activity.member.employee.lastName}</strong>
+                                        ${activity.comment}<br>
+                                        <span class="label label-default">${activity.date}</span> - ${activity.duration} min
+                                </div>
+                            </c:forEach>
+                            <a id="show-more-btn" href="<c:url value="/dashboard/activity"/>" class="button show-more-btn">
+                                <span class="btn-panel">Show more...</span>
+                            </a>
+                        </c:if>
                     </div>
                 </div>
                 <div class="content-panel">
@@ -58,14 +63,14 @@
                     <div class="panel-content">
                         <div class="scrollable-panel-content">
                             <c:if test="${empty assignToMe}">
-                                <p>You currently have no <a href="<c:url value="/issues"/>">issues</a> assigned to you.
+                                <p>You currently have no <a href="<c:url value="/issues?search"/>">issues</a> assigned to you.
                                     Enjoy your day!</p>
                             </c:if>
                             <c:if test="${not empty assignToMe}">
                                 <table class="table table-condensed table-hover">
                                     <thead>
-                                    <td>Key</td>
-                                    <td>Summary</td>
+                                        <td>Key</td>
+                                        <td>Summary</td>
                                     </thead>
                                     <c:forEach var="assign" items="${assignToMe}">
                                         <tr>
@@ -73,7 +78,7 @@
                                                 <a href="<c:url value="/projects?id=${assign.task.project.id}"/>">${assign.task.project.name}</a>
                                             </td>
                                             <td>
-                                                <a href="<c:url value="/issues?id=${assign.task.id}"/>">${assign.task.description}</a>
+                                                <a href="<c:url value="/issues?id=${assign.id}"/>">${assign.task.description}</a>
                                             </td>
                                         </tr>
                                     </c:forEach>
