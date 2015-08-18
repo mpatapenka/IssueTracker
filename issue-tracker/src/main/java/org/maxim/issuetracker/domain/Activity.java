@@ -1,8 +1,6 @@
 package org.maxim.issuetracker.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -32,14 +30,12 @@ public class Activity implements Serializable {
     @Size(max = ValidationConstants.TEXT_MAX_SIZE)
     private String comment;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @Cascade(CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "memberid", nullable = false)
     @JsonBackReference
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @Cascade(CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "assigmentid", nullable = false)
     @JsonBackReference
     private Assigment assigment;
@@ -97,18 +93,20 @@ public class Activity implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Activity activity = (Activity) o;
-        if (id != activity.id) return false;
+
         if (duration != activity.duration) return false;
         if (date != null ? !date.equals(activity.date) : activity.date != null) return false;
-        if (comment != null ? !comment.equals(activity.comment) : activity.comment != null) return false;
-        if (member != null ? !member.equals(activity.member) : activity.member != null) return false;
-        return !(assigment != null ? !assigment.equals(activity.assigment) : activity.assigment != null);
+        return !(comment != null ? !comment.equals(activity.comment) : activity.comment != null);
     }
 
     @Override
     public int hashCode() {
-        return id;
+        int result = date != null ? date.hashCode() : 0;
+        result = 31 * result + duration;
+        result = 31 * result + (comment != null ? comment.hashCode() : 0);
+        return result;
     }
 
     @Override
