@@ -1,6 +1,5 @@
 package org.maxim.issuetracker.dao.db;
 
-import org.hibernate.SessionFactory;
 import org.maxim.issuetracker.dao.EmployeeDAO;
 import org.maxim.issuetracker.domain.Employee;
 import org.maxim.issuetracker.security.SecurityConstants;
@@ -10,12 +9,6 @@ import java.util.List;
 
 @Repository
 public class EmployeeDAOImplDB extends AbstractDAOHelperDB implements EmployeeDAO {
-
-    public EmployeeDAOImplDB() { }
-
-    public EmployeeDAOImplDB(SessionFactory sessionFactory) {
-        super(sessionFactory);
-    }
 
     @Override
     public void save(Employee employee) {

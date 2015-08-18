@@ -1,6 +1,5 @@
 package org.maxim.issuetracker.dao.db;
 
-import org.hibernate.SessionFactory;
 import org.maxim.issuetracker.dao.StatusDAO;
 import org.maxim.issuetracker.domain.Status;
 import org.springframework.stereotype.Repository;
@@ -9,12 +8,6 @@ import java.util.List;
 
 @Repository
 public class StatusDAOImplDB extends AbstractDAOHelperDB implements StatusDAO {
-
-    public StatusDAOImplDB() { }
-
-    public StatusDAOImplDB(SessionFactory sessionFactory) {
-        super(sessionFactory);
-    }
 
     @Override
     public void save(Status status) {

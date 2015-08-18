@@ -1,6 +1,5 @@
 package org.maxim.issuetracker.dao.db;
 
-import org.hibernate.SessionFactory;
 import org.maxim.issuetracker.dao.MemberDAO;
 import org.maxim.issuetracker.domain.Member;
 import org.springframework.stereotype.Repository;
@@ -9,13 +8,6 @@ import java.util.List;
 
 @Repository
 public class MemberDAOImplDB extends AbstractDAOHelperDB implements MemberDAO {
-
-    public MemberDAOImplDB() {
-    }
-
-    public MemberDAOImplDB(SessionFactory sessionFactory) {
-        super(sessionFactory);
-    }
 
     @Override
     public boolean isExist(Member member) {

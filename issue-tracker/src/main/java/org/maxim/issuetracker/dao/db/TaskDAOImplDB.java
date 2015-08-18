@@ -1,6 +1,5 @@
 package org.maxim.issuetracker.dao.db;
 
-import org.hibernate.SessionFactory;
 import org.maxim.issuetracker.dao.TaskDAO;
 import org.maxim.issuetracker.domain.Task;
 import org.springframework.stereotype.Repository;
@@ -9,12 +8,6 @@ import java.util.List;
 
 @Repository
 public class TaskDAOImplDB extends AbstractDAOHelperDB implements TaskDAO {
-
-    public TaskDAOImplDB() { }
-
-    public TaskDAOImplDB(SessionFactory sessionFactory) {
-        super(sessionFactory);
-    }
 
     @Override
     public void save(Task task) {

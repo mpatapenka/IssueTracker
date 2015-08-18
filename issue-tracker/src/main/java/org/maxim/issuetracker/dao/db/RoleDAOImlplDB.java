@@ -1,6 +1,5 @@
 package org.maxim.issuetracker.dao.db;
 
-import org.hibernate.SessionFactory;
 import org.maxim.issuetracker.dao.RoleDAO;
 import org.maxim.issuetracker.domain.Role;
 import org.springframework.stereotype.Repository;
@@ -9,12 +8,6 @@ import java.util.List;
 
 @Repository
 public class RoleDAOImlplDB extends AbstractDAOHelperDB implements RoleDAO {
-
-    public RoleDAOImlplDB() { }
-
-    public RoleDAOImlplDB(SessionFactory sessionFactory) {
-        super(sessionFactory);
-    }
 
     @Override
     public void save(Role role) {

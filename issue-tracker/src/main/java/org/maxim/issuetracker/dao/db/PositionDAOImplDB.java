@@ -1,6 +1,5 @@
 package org.maxim.issuetracker.dao.db;
 
-import org.hibernate.SessionFactory;
 import org.maxim.issuetracker.dao.PositionDAO;
 import org.maxim.issuetracker.domain.Position;
 import org.maxim.issuetracker.security.SecurityConstants;
@@ -10,12 +9,6 @@ import java.util.List;
 
 @Repository
 public class PositionDAOImplDB extends AbstractDAOHelperDB implements PositionDAO {
-
-    public PositionDAOImplDB() { }
-
-    public PositionDAOImplDB(SessionFactory sessionFactory) {
-        super(sessionFactory);
-    }
 
     @Override
     public void save(Position position) {

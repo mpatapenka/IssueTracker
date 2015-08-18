@@ -1,6 +1,5 @@
 package org.maxim.issuetracker.dao.db;
 
-import org.hibernate.SessionFactory;
 import org.maxim.issuetracker.dao.ActivityDAO;
 import org.maxim.issuetracker.domain.Activity;
 import org.springframework.stereotype.Repository;
@@ -10,12 +9,6 @@ import java.util.List;
 
 @Repository
 public class ActivityDAOImplDB extends AbstractDAOHelperDB implements ActivityDAO {
-
-    public ActivityDAOImplDB() { }
-
-    public ActivityDAOImplDB(SessionFactory sessionFactory) {
-        super(sessionFactory);
-    }
 
     @Override
     public void save(Activity activity) {
