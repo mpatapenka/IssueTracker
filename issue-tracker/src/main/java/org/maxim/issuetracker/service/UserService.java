@@ -12,4 +12,6 @@ public interface UserService {
 
     void reportIssue(int assigmentId, String username, Activity activity);
 
+    void reassignIssue(Assigment assigment);
+
 }

@@ -90,4 +90,18 @@ public class UserServiceImpl implements UserService {
 
         activityDAO.save(activity);
     }
+
+    @Override
+    @Transactional
+    public void reassignIssue(Assigment assigment) {
+        Assigment origin = assigmentDAO.findById(assigment.getId());
+        Member assignee = memberDAO.findById(assigment.getMember().getId());
+        if (assignee == null) {
+            throw new IllegalArgumentException("Sorry, you didn't select a member of the project.");
+        }
+
+        origin.setDescription(assigment.getDescription());
+        origin.setMember(assignee);
+    }
+
 }
