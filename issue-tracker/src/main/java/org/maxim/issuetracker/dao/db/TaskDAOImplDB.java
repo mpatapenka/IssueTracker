@@ -28,6 +28,7 @@ public class TaskDAOImplDB extends AbstractDAOHelperDB implements TaskDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Task> list() {
         return currentSession().createQuery("from Task").list();
     }

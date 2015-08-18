@@ -28,6 +28,7 @@ public class AttachmentDAOImplDB extends AbstractDAOHelperDB implements Attachme
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Attachment> list() {
         return currentSession().createQuery("from Attachment").list();
     }

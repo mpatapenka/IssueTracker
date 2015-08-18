@@ -38,6 +38,7 @@ public class MemberDAOImplDB extends AbstractDAOHelperDB implements MemberDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Member> list() {
         return currentSession().createQuery("from Member").list();
     }

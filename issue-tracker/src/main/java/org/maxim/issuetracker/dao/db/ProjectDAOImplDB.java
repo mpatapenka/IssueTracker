@@ -28,6 +28,7 @@ public class ProjectDAOImplDB extends AbstractDAOHelperDB implements ProjectDAO 
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Project> list() {
         return currentSession().createQuery("from Project").list();
     }

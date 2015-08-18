@@ -41,11 +41,13 @@ public class EmployeeDAOImplDB extends AbstractDAOHelperDB implements EmployeeDA
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Employee> list() {
         return currentSession().createQuery("from Employee").list();
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Employee> listAllowed() {
         return currentSession().createQuery("from Employee where position.name!=:pos")
                 .setParameter("pos", SecurityConstants.ADMIN_POSITION).list();

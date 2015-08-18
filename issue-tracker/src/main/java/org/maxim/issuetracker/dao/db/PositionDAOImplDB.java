@@ -29,11 +29,13 @@ public class PositionDAOImplDB extends AbstractDAOHelperDB implements PositionDA
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Position> list() {
         return currentSession().createQuery("from Position").list();
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Position> listAllowed() {
         return currentSession().createQuery("from Position where name!=:pos")
                 .setParameter("pos", SecurityConstants.ADMIN_POSITION).list();

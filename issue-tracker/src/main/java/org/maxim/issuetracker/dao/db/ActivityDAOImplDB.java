@@ -29,11 +29,13 @@ public class ActivityDAOImplDB extends AbstractDAOHelperDB implements ActivityDA
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Activity> list() {
         return currentSession().createQuery("from Activity").list();
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Activity> listLast(int offset) {
         final int defaultBundleSize = 5;
         int startPos = defaultBundleSize * offset;

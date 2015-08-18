@@ -28,6 +28,7 @@ public class AssigmentDAOImplDB extends AbstractDAOHelperDB implements Assigment
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Assigment> list() {
         return currentSession().createQuery("from Assigment").list();
     }

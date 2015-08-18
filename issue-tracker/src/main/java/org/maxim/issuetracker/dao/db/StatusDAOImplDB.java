@@ -28,6 +28,7 @@ public class StatusDAOImplDB extends AbstractDAOHelperDB implements StatusDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Status> list() {
         return currentSession().createQuery("from Status").list();
     }

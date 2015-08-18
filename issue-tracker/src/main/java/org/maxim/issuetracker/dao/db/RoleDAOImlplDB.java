@@ -28,6 +28,7 @@ public class RoleDAOImlplDB extends AbstractDAOHelperDB implements RoleDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Role> list() {
         return currentSession().createQuery("from Role").list();
     }
