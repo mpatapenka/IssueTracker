@@ -8,6 +8,8 @@ import org.maxim.issuetracker.security.SecurityConstants;
 import org.maxim.issuetracker.service.EmployeeService;
 import org.maxim.issuetracker.service.ProjectService;
 import org.maxim.issuetracker.service.RoleService;
+import org.maxim.issuetracker.web.constants.AttributeConstants;
+import org.maxim.issuetracker.web.constants.MappingConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,38 +37,40 @@ public class IndexController {
     @Autowired
     private RoleService roleService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = MappingConstants.ROOT, method = RequestMethod.GET)
     public String showMain() {
         Collection auth = SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getAuthorities();
 
         boolean isUser = auth.contains(new SimpleGrantedAuthority(SecurityConstants.ROLE_USER));
-        boolean isAdmin = auth.contains(new SimpleGrantedAuthority(SecurityConstants.ROLE_ADMIN));
         if (isUser) {
-            return "redirect:/dashboard";
+            return MappingConstants.REDIRECT + MappingConstants.DASHBOARD;
         }
+
+        boolean isAdmin = auth.contains(new SimpleGrantedAuthority(SecurityConstants.ROLE_ADMIN));
         if (isAdmin) {
-            return "redirect:/admin-panel";
+            return MappingConstants.REDIRECT + MappingConstants.ADMIN_PANEL;
         }
-        return "dashboard";
+
+        return MappingConstants.PAGE_DASHBOARD;
     }
 
     @PreAuthorize(SecurityConstants.IS_ANONYMOUS)
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = MappingConstants.LOGIN, method = RequestMethod.GET)
     public String showLoginPage(@RequestParam(required = false) String error,
                                 @RequestParam(required = false) String logout, Model model) {
         if (error != null) {
-            model.addAttribute("errorMessage", "Username or password is incorrect.");
+            model.addAttribute(AttributeConstants.ATTR_ERROR_MSG, "Username or password is incorrect.");
         }
         if (logout != null) {
-            model.addAttribute("logoutMessage", "Logout successful.");
+            model.addAttribute(AttributeConstants.ATTR_LOGOUT_MSG, "Logout successful.");
         }
-        return "login";
+        return MappingConstants.PAGE_LOGIN;
     }
 
     @PreAuthorize(SecurityConstants.IS_AUTHENTICATED)
-    @RequestMapping(value = "/projects", method = RequestMethod.GET, params = "id")
+    @RequestMapping(value = MappingConstants.PROJECTS, method = RequestMethod.GET, params = AttributeConstants.PARAM_ID)
     public String showProject(@RequestParam int id, Model model) {
         Project project = projectService.get(id);
         Set<Task> tasks = project.getTasks();
@@ -77,13 +81,13 @@ public class IndexController {
             }
         }
 
-        model.addAttribute("project", project);
-        model.addAttribute("issues", assigments);
-        model.addAttribute("addMember", new Member());
-        model.addAttribute("employees", employeeService.listAllowed());
-        model.addAttribute("roles", roleService.list());
+        model.addAttribute(AttributeConstants.ATTR_PROJECT, project);
+        model.addAttribute(AttributeConstants.ATTR_ISSUES, assigments);
+        model.addAttribute(AttributeConstants.ATTR_ADD_MEMBER, new Member());
+        model.addAttribute(AttributeConstants.ATTR_EMPLOYEES, employeeService.listAllowed());
+        model.addAttribute(AttributeConstants.ATTR_ROLES, roleService.list());
 
-        return "projects";
+        return MappingConstants.PAGE_PROJECTS;
     }
 
 }

@@ -6,12 +6,14 @@ import org.maxim.issuetracker.domain.Project;
 import org.maxim.issuetracker.domain.Role;
 import org.maxim.issuetracker.security.SecurityConstants;
 import org.maxim.issuetracker.service.*;
+import org.maxim.issuetracker.web.constants.AttributeConstants;
+import org.maxim.issuetracker.web.constants.MappingConstants;
+import org.maxim.issuetracker.web.util.MessageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -35,69 +37,61 @@ public class AdminController {
     private MemberService memberService;
 
     @PreAuthorize(SecurityConstants.HAS_ROLE_ADMIN)
-    @RequestMapping(value = "/admin-panel", method = RequestMethod.GET)
+    @RequestMapping(value = MappingConstants.ADMIN_PANEL, method = RequestMethod.GET)
     public String showAdminPage() {
-        return "adminpage";
+        return MappingConstants.PAGE_ADMIN;
     }
 
     @PreAuthorize(SecurityConstants.HAS_ROLE_ADMIN)
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @RequestMapping(value = MappingConstants.REGISTER, method = RequestMethod.GET)
     public String showUserRegisterPage(Model model) {
         model.addAttribute(new Employee());
-        return "register";
+        return MappingConstants.PAGE_REGISTER;
     }
 
     @ModelAttribute
     public void setDefaultAttributesToModel(Model model) {
-        model.addAttribute("positions", positionService.listAllowed());
-        model.addAttribute("newProject", new Project());
+        model.addAttribute(AttributeConstants.ATTR_POSITIONS, positionService.listAllowed());
+        model.addAttribute(AttributeConstants.ATTR_NEW_PROJECT, new Project());
     }
 
     @PreAuthorize(SecurityConstants.HAS_ROLE_ADMIN)
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = MappingConstants.REGISTER, method = RequestMethod.POST)
     public String registerNewUser(@Valid Employee employee, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "register";
+            return MappingConstants.PAGE_REGISTER;
         }
         try {
             employeeService.register(employee);
-            return "redirect:/admin-panel";
+            return MappingConstants.REDIRECT + MappingConstants.ADMIN_PANEL;
         } catch (RuntimeException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "register";
+            model.addAttribute(AttributeConstants.ATTR_ERROR_MSG, e.getMessage());
+            return MappingConstants.PAGE_REGISTER;
         }
     }
 
     @PreAuthorize(SecurityConstants.HAS_ROLE_ADMIN)
     @ResponseBody
-    @RequestMapping(value = "/projects", method = RequestMethod.POST, params = "new")
+    @RequestMapping(value = MappingConstants.PROJECTS, method = RequestMethod.POST, params = AttributeConstants.PARAM_NEW)
     public String addNewProject(@Valid Project project, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            StringBuilder builder = new StringBuilder();
-            for (FieldError error : bindingResult.getFieldErrors()) {
-                builder.append("Field '")
-                        .append(error.getField())
-                        .append("' has error: ")
-                        .append(error.getDefaultMessage())
-                        .append("\n");
-            }
-            return builder.toString();
+            return MessageUtils.getMessageFromBindingResult(bindingResult);
         }
         projectService.add(project);
-        return "";
+        return AttributeConstants.SUCCESS_RESPONSE_BODY;
     }
 
     @PreAuthorize(SecurityConstants.HAS_ROLE_ADMIN)
     @ResponseBody
-    @RequestMapping(value = "/projects", method = RequestMethod.POST, params = "id")
+    @RequestMapping(value = MappingConstants.PROJECTS, method = RequestMethod.POST, params = AttributeConstants.PARAM_ID)
     public String addMember(@RequestParam int id, Member member) {
         Project project = projectService.get(id);
         Role role = roleService.get(member.getRole().getId());
         Employee employee = employeeService.get(member.getEmployee().getId());
 
-        String errorMessage = "";
+        String responseResult = AttributeConstants.SUCCESS_RESPONSE_BODY;
         if (project == null || role == null || employee == null) {
-            errorMessage = "Check your input data. Some values was incorrect.";
+            responseResult = "Check your input data. Some values was incorrect.";
         } else {
             member.setEmployee(employee);
             member.setRole(role);
@@ -105,10 +99,10 @@ public class AdminController {
             try {
                 memberService.add(member);
             } catch (RuntimeException e) {
-                errorMessage = e.getMessage();
+                responseResult = e.getMessage();
             }
         }
-        return errorMessage;
+        return responseResult;
     }
 
 }
