@@ -49,6 +49,7 @@ public class ActivityServiceImpl implements ActivityService {
             activityInfo.put("name", employee.getFirstName() + " " + employee.getLastName());
             activityInfo.put("date", activity.getDate());
             activityInfo.put("comment", activity.getComment());
+            activityInfo.put("duration", activity.getDuration());
 
             activityData.add(activityInfo);
         }
