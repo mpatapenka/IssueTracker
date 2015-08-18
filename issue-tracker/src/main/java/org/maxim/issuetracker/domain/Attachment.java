@@ -1,8 +1,6 @@
 package org.maxim.issuetracker.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -31,15 +29,13 @@ public class Attachment implements Serializable {
     private String description;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @Cascade(CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "projectid", nullable = false)
     @JsonBackReference
     private Project project;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @Cascade(CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "taskid", nullable = false)
     @JsonBackReference
     private Task task;
@@ -97,18 +93,20 @@ public class Attachment implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Attachment that = (Attachment) o;
-        if (id != that.id) return false;
+
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (size != null ? !size.equals(that.size) : that.size != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (project != null ? !project.equals(that.project) : that.project != null) return false;
-        return !(task != null ? !task.equals(that.task) : that.task != null);
+        return !(description != null ? !description.equals(that.description) : that.description != null);
     }
 
     @Override
     public int hashCode() {
-        return id;
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (size != null ? size.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        return result;
     }
 
     @Override
