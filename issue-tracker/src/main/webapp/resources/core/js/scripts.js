@@ -9,10 +9,13 @@ MvcUtil.showResponse = function (type, list, element) {
     var responseElementId = element.attr("id") + "Response";
     var responseElement = $("#" + responseElementId);
     if (responseElement.length == 0) {
-        responseElement = $('<div class="activity-item"><strong>' + list['name'] + '</strong> ' + list['comment'] + '<br>' + list['date'] + '</div>')
+        responseElement = $('<div class="activity-item"><strong>' + list['name']
+            + '</strong> ' + list['comment'] + '<br><span class="label label-default">' + list['date'] + '</span> - '
+            + '<span class="label label-success">' + list['duration'] + ' min</span>')
             .insertBefore(element);
     } else {
-        responseElement.replaceWith('<span id="' + responseElementId + '" class="' + type + '" style="display:none">' + list + '</span>');
+        responseElement.replaceWith('<span id="' + responseElementId + '" class="'
+            + type + '" style="display:none">' + list + '</span>');
         responseElement = $("#" + responseElementId);
     }
     responseElement.fadeIn("slow");
@@ -133,6 +136,35 @@ function reportIssue(id) {
                 var insElem = $(strDiv);
                 var parent = document.getElementById("reportForm");
                 var test = document.getElementById("insertedErrorReport");
+                if (test != null) {
+                    parent.removeChild(test);
+                }
+                insElem.insertBefore(element);
+            } else {
+                location.reload();
+            }
+        },
+        error: function () {
+            location.reload();
+        }
+    });
+}
+
+function reassignIssue(id) {
+    $.ajax({
+        url: "/issues?id=" + id + "&reassign",
+        data: $('#reassignForm').serialize(),
+        type: "POST",
+        success: function (result) {
+            if (result != "") {
+                result = result.split('\n').join('<br>');
+                var element = $('.insertBeforeReassignForm');
+                var strDiv = '<div id="insertedErrorReassign" class="alert alert-danger alert-dismissible alert-fix alert-danger-fix" role="alert">' +
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                    '<span aria-hidden="true">&times;</span></button>' + result + '</div>';
+                var insElem = $(strDiv);
+                var parent = document.getElementById("reassignForm");
+                var test = document.getElementById("insertedErrorReassign");
                 if (test != null) {
                     parent.removeChild(test);
                 }
