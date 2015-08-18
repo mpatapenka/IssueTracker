@@ -21,22 +21,19 @@ public class Member implements Serializable {
     private int id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @Cascade(CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "projectid", nullable = false)
     @JsonBackReference
     private Project project;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @Cascade(CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "employeeid", nullable = false)
     @JsonBackReference
     private Employee employee;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @Cascade(CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "roleid", nullable = false)
     @JsonBackReference
     private Role role;
@@ -106,18 +103,18 @@ public class Member implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Member member = (Member) o;
-        if (id != member.id) return false;
+
         if (project != null ? !project.equals(member.project) : member.project != null) return false;
-        if (employee != null ? !employee.equals(member.employee) : member.employee != null) return false;
-        if (role != null ? !role.equals(member.role) : member.role != null) return false;
-        if (assigments != null ? !assigments.equals(member.assigments) : member.assigments != null) return false;
-        return !(activities != null ? !activities.equals(member.activities) : member.activities != null);
+        return !(employee != null ? !employee.equals(member.employee) : member.employee != null);
     }
 
     @Override
     public int hashCode() {
-        return id;
+        int result = project != null ? project.hashCode() : 0;
+        result = 31 * result + (employee != null ? employee.hashCode() : 0);
+        return result;
     }
 
     @Override
