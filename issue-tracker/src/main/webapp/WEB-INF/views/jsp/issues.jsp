@@ -20,15 +20,35 @@
                     Task info
                 </div>
                 <div class="panel-content">
-                    <p><a href="#" class="btn btn-default">Start progress</a></p>
+                    <p>
+                        <a href="#" class="btn btn-default">Assign</a>
+                        <a href="#" class="btn btn-default">Start progress</a>
+                    </p>
                     <p>Status: <strong>${assign.task.status.name}</strong></p>
-                    <p>Assignee: <strong>${assign.member.employee.firstName} ${assign.member.employee.lastName}</strong></p>
+                    <p>Assignee:
+                        <c:if test="${empty assign.member}">
+                            &ndash;
+                        </c:if>
+                        <c:if test="${not empty assign.member}">
+                            <strong>${assign.member.employee.firstName} ${assign.member.employee.lastName}</strong>
+                        </c:if>
+                    </p>
                     <hr>
                     <p>Plan start date: <strong>${assign.task.planStartDate}</strong></p>
                     <p>Plan end date: <strong>${assign.task.planEndDate}</strong></p>
                     <hr>
-                    <p>Action start date: <strong>${assign.task.actionStartDate}</strong></p>
-                    <p>Action end date: <strong>${assign.task.actionEndDate}</strong></p>
+                    <p>Action start date:
+                        <c:if test="${empty assign.task.actionStartDate}">
+                            &ndash;
+                        </c:if>
+                        <strong>${assign.task.actionStartDate}</strong>
+                    </p>
+                    <p>Action end date:
+                        <c:if test="${empty assign.task.actionEndDate}">
+                            &ndash;
+                        </c:if>
+                        <strong>${assign.task.actionEndDate}</strong>
+                    </p>
                     <a href="#reportModal" data-toggle="modal" class="btn btn-default">Report</a>
                 </div>
             </div>
@@ -37,15 +57,20 @@
                     Activity
                 </div>
                 <div class="panel-content">
-                    <div class="scrollable-panel-content">
-                        <c:forEach items="${assign.activities}" var="activity">
-                            <div class="activity-item">
-                                <strong>${activity.member.employee.firstName} ${activity.member.employee.lastName}</strong>
-                                    ${activity.comment}<br>
-                                    ${activity.date} - ${activity.duration} min
-                            </div>
-                        </c:forEach>
-                    </div>
+                    <c:if test="${empty assign.activities}">
+                        <p>In the current task no activity yet.</p>
+                    </c:if>
+                    <c:if test="${not empty assign.activities}">
+                        <div class="scrollable-panel-content">
+                            <c:forEach items="${assign.activities}" var="activity">
+                                <div class="activity-item">
+                                    <strong>${activity.member.employee.firstName} ${activity.member.employee.lastName}</strong>
+                                        ${activity.comment}<br>
+                                        <span class="label label-default">${activity.date}</span> - ${activity.duration} min
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </c:if>
                 </div>
             </div>
         </div>
