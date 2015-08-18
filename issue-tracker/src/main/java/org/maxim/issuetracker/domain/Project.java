@@ -98,18 +98,15 @@ public class Project implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Project project = (Project) o;
-        if (id != project.id) return false;
-        if (name != null ? !name.equals(project.name) : project.name != null) return false;
-        if (description != null ? !description.equals(project.description) : project.description != null) return false;
-        if (members != null ? !members.equals(project.members) : project.members != null) return false;
-        if (tasks != null ? !tasks.equals(project.tasks) : project.tasks != null) return false;
-        return !(attachments != null ? !attachments.equals(project.attachments) : project.attachments != null);
+
+        return !(name != null ? !name.equals(project.name) : project.name != null);
     }
 
     @Override
     public int hashCode() {
-        return id;
+        return name != null ? name.hashCode() : 0;
     }
 
     @Override
