@@ -50,9 +50,11 @@
                                         <span class="label label-default">${activity.date}</span> - ${activity.duration} min
                                 </div>
                             </c:forEach>
-                            <a id="show-more-btn" href="<c:url value="/dashboard/activity"/>" class="button show-more-btn">
-                                <span class="btn-panel">Show more...</span>
-                            </a>
+                            <c:if test="${lastActivities.size() eq 5}">
+                                <a id="show-more-btn" href="<c:url value="/dashboard/activity"/>" class="button show-more-btn">
+                                    <span class="btn-panel">Show more...</span>
+                                </a>
+                            </c:if>
                         </c:if>
                     </div>
                 </div>
