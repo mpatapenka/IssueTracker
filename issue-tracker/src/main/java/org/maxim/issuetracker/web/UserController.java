@@ -123,9 +123,23 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = MappingConstants.ISSUES, method = RequestMethod.POST,
             params = {AttributeConstants.PARAM_ID, AttributeConstants.PARAM_REASSIGN})
-    public String reAssignToIssue(Assigment assigment) {
+    public String reassignToIssue(Assigment assigment) {
         try {
             userService.reassignIssue(assigment);
+            return AttributeConstants.SUCCESS_RESPONSE_BODY;
+        } catch (RuntimeException e) {
+            return e.getMessage();
+        }
+    }
+
+    @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
+    @ResponseBody
+    @RequestMapping(value = MappingConstants.ISSUES, method = RequestMethod.POST,
+            params = {AttributeConstants.PARAM_ID, AttributeConstants.PARAM_TO})
+    public String reAssignToIssue(@RequestParam int id, @RequestParam int to) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        try {
+            userService.transferIssue(id, username, to);
             return AttributeConstants.SUCCESS_RESPONSE_BODY;
         } catch (RuntimeException e) {
             return e.getMessage();
