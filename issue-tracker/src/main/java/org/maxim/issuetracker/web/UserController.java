@@ -3,30 +3,26 @@ package org.maxim.issuetracker.web;
 import org.maxim.issuetracker.domain.*;
 import org.maxim.issuetracker.security.SecurityConstants;
 import org.maxim.issuetracker.service.*;
+import org.maxim.issuetracker.web.constants.AttributeConstants;
+import org.maxim.issuetracker.web.constants.MappingConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
 @Controller
 public class UserController {
-
-    @Autowired
-    private EmployeeService employeeService;
 
     @Autowired
     private ActivityService activityService;
@@ -38,37 +34,31 @@ public class UserController {
     private AssigmentService assigmentService;
 
     @Autowired
-    private TaskService taskService;
-
-    @Autowired
-    private MemberService memberService;
-
-    @Autowired
-    private StatusService statusService;
+    private UserService userService;
 
     @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
-    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    @RequestMapping(value = MappingConstants.DASHBOARD, method = RequestMethod.GET)
     public String showDashboard(Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Employee user = employeeService.findByLogin(username);
+        Employee user = userService.findEmployeeByUsername(username);
 
         Set<Member> members = user.getMembers();
         List<Assigment> assignToMe = new ArrayList<>();
         for (Member member : members) {
             assignToMe.addAll(member.getAssigments());
         }
-        int withoutOffset = 0;
+        final int withoutOffset = 0;
         List<Activity> lastActivities = activityService.listLast(withoutOffset);
 
-        model.addAttribute("lastActivities", lastActivities);
-        model.addAttribute("assignToMe", assignToMe);
+        model.addAttribute(AttributeConstants.ATTR_LAST_ACTIVITIES, lastActivities);
+        model.addAttribute(AttributeConstants.ATTR_ASSIGN_TO_ME, assignToMe);
 
-        return "dashboard";
+        return MappingConstants.PAGE_DASHBOARD;
     }
 
     @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
     @ResponseBody
-    @RequestMapping(value = "/dashboard/activity", method = RequestMethod.GET)
+    @RequestMapping(value = MappingConstants.DASHBOARD + MappingConstants.ACTIVITY, method = RequestMethod.GET)
     public String getActivities(@RequestParam int offset) {
         List<Activity> activities = activityService.listLast(offset);
         return activityService.convertToJson(activities);
@@ -76,85 +66,61 @@ public class UserController {
 
     @PreAuthorize(SecurityConstants.HAS_ROLE_LEAD)
     @ResponseBody
-    @RequestMapping(value = "/employees", method = RequestMethod.POST, params = "project")
-    public String getProjectEmployees(@RequestParam(value = "project") int id) {
-        Project project = projectService.get(id);
-        return projectService.getProjectMembersWithJson(project);
+    @RequestMapping(value = MappingConstants.EMPLOYEES, method = RequestMethod.POST, params = AttributeConstants.PARAM_PROJECT)
+    public String getProjectEmployees(@RequestParam int project) {
+        Project projectObj = projectService.get(project);
+        return projectService.getProjectMembersWithJson(projectObj);
     }
 
     @PreAuthorize(SecurityConstants.HAS_ROLE_LEAD)
     @ResponseBody
-    @RequestMapping(value = "/issues", method = RequestMethod.POST, params = "create")
-    public String createIssue(Assigment assigment) {
-        int memberId = assigment.getMember().getId();
-        int projectId = assigment.getMember().getProject().getId();
-
-        Project project = projectService.get(projectId);
-        if (project == null) {
+    @RequestMapping(value = MappingConstants.ISSUES, method = RequestMethod.POST, params = AttributeConstants.PARAM_CREATE)
+    public String createIssue(@Valid Assigment assigment, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return "Check your input data and try again.";
         }
-
-        Task task = assigment.getTask();
-        task.setProject(project);
-
-        Status initialStatus = statusService.getInitial();
-        task.setStatus(initialStatus);
-
-        Member member = memberService.get(memberId);
-        if (member != null) {
-            assigment.setMember(member);
-            assigment.setTask(task);
-            assigmentService.add(assigment);
-            System.out.println("member");
-        } else {
-            taskService.add(task);
-            System.out.println("task");
+        try {
+            userService.addIssue(assigment);
+            return AttributeConstants.SUCCESS_RESPONSE_BODY;
+        } catch (RuntimeException e) {
+            return e.getMessage();
         }
-        return "";
     }
 
     @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
-    @RequestMapping(value = "/issues", method = RequestMethod.GET, params = "id")
+    @RequestMapping(value = MappingConstants.ISSUES, method = RequestMethod.GET, params = AttributeConstants.PARAM_ID)
     public String showIssue(@RequestParam int id, Model model) {
-        Assigment assigment = assigmentService.get(id);
-        model.addAttribute("assign", assigment);
-        return "issues";
+        model.addAttribute(AttributeConstants.ATTR_ASSIGN, assigmentService.get(id));
+        return MappingConstants.PAGE_ISSUES;
     }
 
     @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
     @ResponseBody
-    @RequestMapping(value = "/issues", method = RequestMethod.GET, params = {"id", "export"})
+    @RequestMapping(value = MappingConstants.ISSUES, method = RequestMethod.GET,
+            params = {AttributeConstants.PARAM_ID, AttributeConstants.PARAM_EXPORT})
     public Assigment exportIssueToXml(@RequestParam int id) {
         return assigmentService.get(id);
     }
 
-    @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
+    @PreAuthorize(SecurityConstants.IS_AUTHENTICATED)
     @ResponseBody
-    @RequestMapping(value = "/issues", method = RequestMethod.POST, params = {"id", "report"})
+    @RequestMapping(value = MappingConstants.ISSUES, method = RequestMethod.POST,
+            params = {AttributeConstants.PARAM_ID, AttributeConstants.PARAM_REPORT})
     public String reportIssue(@RequestParam int id, @Valid Activity activity, BindingResult bindingResult) {
-        Assigment assigment = assigmentService.get(id);
-        Member member = assigment.getMember();
-
-        activity.setAssigment(assigment);
-        activity.setMember(member);
-        activity.setDate(new Date(Calendar.getInstance().getTime().getTime()));
         if (bindingResult.hasErrors()) {
-            StringBuilder builder = new StringBuilder();
-            for (FieldError error : bindingResult.getFieldErrors()) {
-                builder.append("Field '")
-                        .append(error.getField())
-                        .append("' has error: ")
-                        .append(error.getDefaultMessage())
-                        .append("\n");
-            }
-            return builder.toString();
+            return "Check your input data and try again.";
         }
-        activityService.add(activity);
-        return "";
+        try {
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            userService.reportIssue(id, username, activity);
+            return AttributeConstants.SUCCESS_RESPONSE_BODY;
+        } catch (RuntimeException e) {
+            return e.getMessage();
+        }
     }
 
-    @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
-    @RequestMapping(value = "/issues", method = RequestMethod.GET, params = "search")
+    @PreAuthorize(SecurityConstants.IS_AUTHENTICATED)
+    @RequestMapping(value = MappingConstants.ISSUES, method = RequestMethod.GET, params = AttributeConstants.PARAM_SEARCH)
     public String showSearchIssues() {
         return "issues";
     }
