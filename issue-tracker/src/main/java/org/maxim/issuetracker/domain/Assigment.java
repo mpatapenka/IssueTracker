@@ -24,7 +24,7 @@ public class Assigment implements Serializable {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "memberid", nullable = false)
+    @JoinColumn(name = "memberid", nullable = true)
     @JsonBackReference
     private Member member;
 
