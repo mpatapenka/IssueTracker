@@ -9,6 +9,7 @@ public final class AttributeConstants {
     public static final String PARAM_EXPORT = "export";
     public static final String PARAM_REPORT = "report";
     public static final String PARAM_SEARCH = "search";
+    public static final String PARAM_REASSIGN = "reassign";
 
 
 
@@ -29,6 +30,7 @@ public final class AttributeConstants {
     public static final String ATTR_NEW_ASSIGN = "newAssign";
     public static final String ATTR_NEW_REPORT = "newReport";
     public static final String ATTR_ALL_PROJECTS = "allProjects";
+    public static final String ATTR_REASSIGN = "reAssign";
 
 
 
