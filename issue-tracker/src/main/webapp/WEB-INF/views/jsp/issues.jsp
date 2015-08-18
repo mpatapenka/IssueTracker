@@ -25,7 +25,12 @@
                         <security:authorize access="hasRole('ROLE_LEAD')">
                             <a href="#reassignModal" data-toggle="modal" class="btn btn-default">Assign</a>
                         </security:authorize>
-                        <a href="#" class="btn btn-default">Start progress</a>
+                        <a href="<c:url value="/issues?id=${assign.id}&to=1"/>" class="btn btn-default">Start progress</a>
+                        <a href="<c:url value="/issues?id=${assign.id}&to=2"/>" class="btn btn-default">Delivery</a>
+                        <security:authorize access="hasRole('ROLE_LEAD')">
+                            <a href="<c:url value="/issues?id=${assign.id}&to=3"/>" class="btn btn-success">Done</a>
+                            <a href="<c:url value="/issues?id=${assign.id}&to=1"/>" class="btn btn-danger">Reject</a>
+                        </security:authorize>
                     </p>
                     <p>Status: <strong>${assign.task.status.name}</strong></p>
                     <p>Assignee:
