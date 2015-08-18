@@ -35,6 +35,7 @@ public class UserControllerAdvice {
     public void addFormData(Model model) {
         model.addAttribute(AttributeConstants.ATTR_NEW_ASSIGN, new Assigment());
         model.addAttribute(AttributeConstants.ATTR_NEW_REPORT, new Activity());
+        model.addAttribute(AttributeConstants.ATTR_REASSIGN, new Assigment());
         model.addAttribute(AttributeConstants.ATTR_ALL_PROJECTS, projectService.list());
     }
 
