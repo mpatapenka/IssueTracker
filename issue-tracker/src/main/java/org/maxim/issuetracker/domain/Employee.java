@@ -38,8 +38,7 @@ public class Employee implements Serializable {
     private String password;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @Cascade(CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "positionid", nullable = false)
     @JsonBackReference
     private Position position;
@@ -113,20 +112,15 @@ public class Employee implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Employee employee = (Employee) o;
-        if (id != employee.id) return false;
-        if (firstName != null ? !firstName.equals(employee.firstName) : employee.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(employee.lastName) : employee.lastName != null) return false;
-        if (login != null ? !login.equals(employee.login) : employee.login != null) return false;
-        if (password != null ? !password.equals(employee.password) : employee.password != null) return false;
-        return !(position != null ? !position.equals(employee.position) : employee.position != null);
+
+        return !(login != null ? !login.equals(employee.login) : employee.login != null);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (login != null ? login.hashCode() : 0);
-        return result;
+        return login != null ? login.hashCode() : 0;
     }
 
     @Override
