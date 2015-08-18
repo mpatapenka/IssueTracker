@@ -58,15 +58,15 @@ public class Status implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Status status = (Status) o;
-        if (id != status.id) return false;
-        if (name != null ? !name.equals(status.name) : status.name != null) return false;
-        return !(tasks != null ? !tasks.equals(status.tasks) : status.tasks != null);
+
+        return !(name != null ? !name.equals(status.name) : status.name != null);
     }
 
     @Override
     public int hashCode() {
-        return id;
+        return name != null ? name.hashCode() : 0;
     }
 
     @Override
