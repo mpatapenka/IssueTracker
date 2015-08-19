@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -136,7 +138,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = MappingConstants.ISSUES, method = RequestMethod.POST,
             params = {AttributeConstants.PARAM_ID, AttributeConstants.PARAM_TO})
-    public String reAssignToIssue(@RequestParam int id, @RequestParam int to) {
+    public String issueStartProgress(@RequestParam int id, @RequestParam String to) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         try {
             userService.transferIssue(id, username, to);
@@ -146,10 +148,25 @@ public class UserController {
         }
     }
 
-    @PreAuthorize(SecurityConstants.IS_AUTHENTICATED)
-    @RequestMapping(value = MappingConstants.ISSUES, method = RequestMethod.GET, params = AttributeConstants.PARAM_SEARCH)
-    public String showSearchIssues() {
-        return "issues";
+    @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
+    @ResponseBody
+    @RequestMapping(value = MappingConstants.ISSUES, method = RequestMethod.POST,
+            params = {AttributeConstants.PARAM_ID, AttributeConstants.PARAM_ATTACH})
+    public String uploadFile(@RequestParam int id, Attachment attachment,
+                             @RequestParam(value = AttributeConstants.ATTR_FILE, required = false) MultipartFile file) {
+        try {
+            userService.attachFile(id, attachment, file);
+            return AttributeConstants.SUCCESS_RESPONSE_BODY;
+        } catch (RuntimeException e) {
+            return e.getMessage();
+        }
+    }
+
+    @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
+    @RequestMapping(value = MappingConstants.ISSUES, method = RequestMethod.GET,
+            params = {AttributeConstants.PARAM_ID, AttributeConstants.PARAM_DOWNLOAD_FILE})
+    public void downloadFile(@RequestParam int id, HttpServletResponse response) {
+        userService.downloadFile(id, response);
     }
 
 }
