@@ -57,6 +57,7 @@ public class Member implements Serializable {
         this.id = id;
     }
 
+    @XmlTransient
     public Project getProject() {
         return project;
     }
