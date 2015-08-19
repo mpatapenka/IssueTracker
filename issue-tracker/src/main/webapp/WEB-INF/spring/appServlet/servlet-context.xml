@@ -26,6 +26,11 @@
         <beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
     </beans:bean>
 
+    <beans:bean id="multipartResolver"
+                class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <beans:property name="maxUploadSize" value="1000000" />
+    </beans:bean>
+
     <beans:import resource="controllers.xml"/>
 
 </beans:beans>
