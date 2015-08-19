@@ -66,8 +66,7 @@
                     <div class="panel-content">
                         <div class="scrollable-panel-content">
                             <c:if test="${empty assignToMe}">
-                                <p>You currently have no <a href="<c:url value="/issues?search"/>">issues</a> assigned to you.
-                                    Enjoy your day!</p>
+                                <p>You currently have no issues assigned to you. Enjoy your day!</p>
                             </c:if>
                             <c:if test="${not empty assignToMe}">
                                 <table class="table table-condensed table-hover">
