@@ -20,9 +20,12 @@ public class Attachment implements Serializable {
     @Size(max = ValidationConstants.TEXT_MAX_SIZE)
     private String name;
 
-    @Column(name = "size")
+    @Column(name = "filesystemname")
     @Size(max = ValidationConstants.TEXT_MAX_SIZE)
-    private String size;
+    private String fileSystemName;
+
+    @Column(name = "size")
+    private long size;
 
     @Column(name = "description")
     @Size(max = ValidationConstants.TEXT_MAX_SIZE)
@@ -57,11 +60,19 @@ public class Attachment implements Serializable {
         this.name = name;
     }
 
-    public String getSize() {
+    public String getFileSystemName() {
+        return fileSystemName;
+    }
+
+    public void setFileSystemName(String fileSystemName) {
+        this.fileSystemName = fileSystemName;
+    }
+
+    public long getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(long size) {
         this.size = size;
     }
 
@@ -96,16 +107,16 @@ public class Attachment implements Serializable {
 
         Attachment that = (Attachment) o;
 
+        if (size != that.size) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (size != null ? !size.equals(that.size) : that.size != null) return false;
-        return !(description != null ? !description.equals(that.description) : that.description != null);
+        return !(fileSystemName != null ? !fileSystemName.equals(that.fileSystemName) : that.fileSystemName != null);
     }
 
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (size != null ? size.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (fileSystemName != null ? fileSystemName.hashCode() : 0);
+        result = 31 * result + (int) (size ^ (size >>> 32));
         return result;
     }
 
@@ -114,7 +125,8 @@ public class Attachment implements Serializable {
         return "Attachment{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", size='" + size + '\'' +
+                ", fileSystemName='" + fileSystemName + '\'' +
+                ", size=" + size +
                 ", description='" + description + '\'' +
                 ", project=" + project +
                 ", task=" + task +
