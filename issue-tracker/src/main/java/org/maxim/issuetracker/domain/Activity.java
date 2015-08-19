@@ -27,7 +27,7 @@ public class Activity implements Serializable {
     private int duration;
 
     @Column(name = "comment")
-    @Size(max = ValidationConstants.TEXT_MAX_SIZE)
+    @Size(min = 1, max = ValidationConstants.TEXT_MAX_SIZE)
     private String comment;
 
     @ManyToOne
