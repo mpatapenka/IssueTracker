@@ -2,6 +2,7 @@ package org.maxim.issuetracker.web.advice;
 
 import org.maxim.issuetracker.domain.Activity;
 import org.maxim.issuetracker.domain.Assigment;
+import org.maxim.issuetracker.domain.Attachment;
 import org.maxim.issuetracker.domain.Employee;
 import org.maxim.issuetracker.service.EmployeeService;
 import org.maxim.issuetracker.service.ProjectService;
@@ -28,6 +29,7 @@ public class UserControllerAdvice {
         if (user != null) {
             model.addAttribute(AttributeConstants.ATTR_MEMBERS, user.getMembers());
             model.addAttribute(AttributeConstants.ATTR_USER, user.getFirstName() + " " + user.getLastName());
+            model.addAttribute(AttributeConstants.ATTR_USER_ID, user.getId());
         }
     }
 
@@ -36,6 +38,7 @@ public class UserControllerAdvice {
         model.addAttribute(AttributeConstants.ATTR_NEW_ASSIGN, new Assigment());
         model.addAttribute(AttributeConstants.ATTR_NEW_REPORT, new Activity());
         model.addAttribute(AttributeConstants.ATTR_REASSIGN, new Assigment());
+        model.addAttribute(AttributeConstants.ATTR_NEW_ATTACHMENT, new Attachment());
         model.addAttribute(AttributeConstants.ATTR_ALL_PROJECTS, projectService.list());
     }
 
