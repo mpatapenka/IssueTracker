@@ -179,6 +179,57 @@ function reassignIssue(id) {
     });
 }
 
+function transferIssueStatus(id, param) {
+    $.ajax({
+        url: "/issues?id=" + id + "&to=" + param,
+        type: "POST",
+        success: function (result) {
+            if (result != "") {
+                alert(result);
+            } else {
+                location.reload();
+            }
+        },
+        error: function () {
+            location.reload();
+        }
+    });
+}
+
+function attachFile(id) {
+    var data = new FormData($('#attachForm')[0]);
+    $.ajax({
+        url: "/issues?id=" + id + "&attach",
+        data: data,
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        type: "POST",
+        success: function (result) {
+            if (result != "") {
+                result = result.split('\n').join('<br>');
+                var element = $('.insertBeforeAttachForm');
+                var strDiv = '<div id="insertedErrorAttach" class="alert alert-danger alert-dismissible alert-fix alert-danger-fix" role="alert">' +
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                    '<span aria-hidden="true">&times;</span></button>' + result + '</div>';
+                var insElem = $(strDiv);
+                var parent = document.getElementById("attachForm");
+                var test = document.getElementById("insertedErrorAttach");
+                if (test != null) {
+                    parent.removeChild(test);
+                }
+                insElem.insertBefore(element);
+            } else {
+                location.reload();
+            }
+        },
+        error: function (xhr) {
+            alert(xhr);
+        }
+    });
+}
+
 function createIssue() {
     $.ajax({
         url: "/issues?create",
