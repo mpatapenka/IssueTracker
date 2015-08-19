@@ -8,7 +8,7 @@
         <div class="align-wrapper">
             <div class="login-panel">
                 <div class="login-panel-header">
-                    Login
+                    <spring:message code="label.login"/>
                 </div>
                 <form action="<c:url value='/j_spring_security_check'/>" method="post">
                     <c:if test="${errorMessage != null}">
@@ -29,10 +29,10 @@
                     </c:if>
                     <input type="text" class="text-field" name="username" placeholder="Username">
                     <input type="password" class="text-field" name="password" placeholder="Password">
-                    <input type="submit" class="login-button" value="Sign in">
+                    <input type="submit" class="login-button" value="<spring:message code="label.signin"/>">
                 </form>
                 <div class="login-panel-footer">
-                    Back to start page? <a href="<c:url value="/"/>">Dashboard</a>.
+                    <spring:message code="label.back-page"/>? <a href="<c:url value="/"/>"><spring:message code="header.dashboard"/></a>.
                 </div>
             </div>
         </div>

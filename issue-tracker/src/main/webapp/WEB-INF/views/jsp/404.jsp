@@ -1,5 +1,6 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <tiles:insertDefinition name="ftemplate">
@@ -7,11 +8,11 @@
         <div class="align-wrapper">
             <div class="login-panel">
                 <div class="login-panel-header">
-                    HTTP Status 404 - Page Not Found
+                    HTTP Status 404 - <spring:message code="error.title404"/>
                 </div>
-                <p>Sorry, the requested resource is not found.</p>
+                <p><spring:message code="error.message404"/></p>
                 <div class="login-panel-footer">
-                    Back to start page? <a href="<c:url value="/"/>">Go home</a>.
+                    <spring:message code="label.back-page"/>? <a href="<c:url value="/"/>"><spring:message code="label.go-home"/></a>.
                 </div>
             </div>
         </div>
