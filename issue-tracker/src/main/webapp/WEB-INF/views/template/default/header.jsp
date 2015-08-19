@@ -31,9 +31,6 @@
                     </c:forEach>
                 </ul>
             </li>
-            <li class="menu-item">
-                <a href="<c:url value="/issues?search"/>" class="nav-link">Issues</a>
-            </li>
         </security:authorize>
         <security:authorize access="hasRole('ROLE_LEAD')">
             <li class="button nav-button menu-item"><a href="#issueModal" data-toggle="modal" class="nav-link">Create
