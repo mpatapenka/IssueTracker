@@ -74,6 +74,10 @@ public class IndexController {
     @RequestMapping(value = MappingConstants.PROJECTS, method = RequestMethod.GET, params = AttributeConstants.PARAM_ID)
     public String showProject(@RequestParam int id, Model model) {
         Project project = projectService.get(id);
+        if (project == null) {
+            return MappingConstants.REDIRECT + MappingConstants.ROOT;
+        }
+
         Set<Task> tasks = project.getTasks();
         List<Assigment> assigments = new ArrayList<>();
         for (Task task : tasks) {

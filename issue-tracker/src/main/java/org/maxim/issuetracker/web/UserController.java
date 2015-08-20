@@ -93,8 +93,12 @@ public class UserController {
     @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
     @RequestMapping(value = MappingConstants.ISSUES, method = RequestMethod.GET, params = AttributeConstants.PARAM_ID)
     public String showIssue(@RequestParam int id, Model model) {
-        model.addAttribute(AttributeConstants.ATTR_ASSIGN, assigmentService.get(id));
-        return MappingConstants.PAGE_ISSUES;
+        Assigment assigment = assigmentService.get(id);
+        if (assigment != null) {
+            model.addAttribute(AttributeConstants.ATTR_ASSIGN, assigment);
+            return MappingConstants.PAGE_ISSUES;
+        }
+        return MappingConstants.REDIRECT + MappingConstants.ROOT;
     }
 
     @PreAuthorize(SecurityConstants.HAS_ROLE_USER)
