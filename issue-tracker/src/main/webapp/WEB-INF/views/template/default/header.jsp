@@ -36,6 +36,14 @@
         <security:authorize access="hasRole('ROLE_LEAD')">
             <li class="button nav-button menu-item"><a href="#issueModal" data-toggle="modal" class="nav-link"><spring:message code="label.create-issue"/></a></li>
         </security:authorize>
+        <li class="account-button dropdown menu-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="true"><spring:message code="label.lang"/><span class="caret"></span></a>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li><a href="<c:url value="/?lang=en"/>"><spring:message code="label.eng"/></a></li>
+                <li><a href="<c:url value="/?lang=ru"/>"><spring:message code="label.rus"/></a></li>
+            </ul>
+        </li>
         <security:authorize access="isAuthenticated()">
             <li class="account-button dropdown menu-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
