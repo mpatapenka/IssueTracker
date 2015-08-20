@@ -10,6 +10,7 @@ import org.maxim.issuetracker.service.ProjectService;
 import org.maxim.issuetracker.service.RoleService;
 import org.maxim.issuetracker.web.constants.AttributeConstants;
 import org.maxim.issuetracker.web.constants.MappingConstants;
+import org.maxim.issuetracker.web.constants.MessageConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -61,10 +62,10 @@ public class IndexController {
     public String showLoginPage(@RequestParam(required = false) String error,
                                 @RequestParam(required = false) String logout, Model model) {
         if (error != null) {
-            model.addAttribute(AttributeConstants.ATTR_ERROR_MSG, "Username or password is incorrect.");
+            model.addAttribute(AttributeConstants.ATTR_ERROR_MSG, MessageConstants.LOGIN_ERROR);
         }
         if (logout != null) {
-            model.addAttribute(AttributeConstants.ATTR_LOGOUT_MSG, "Logout successful.");
+            model.addAttribute(AttributeConstants.ATTR_LOGOUT_MSG, MessageConstants.LOGOUT_SUCCESS);
         }
         return MappingConstants.PAGE_LOGIN;
     }

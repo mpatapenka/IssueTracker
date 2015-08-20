@@ -6,6 +6,7 @@ import org.maxim.issuetracker.dao.*;
 import org.maxim.issuetracker.domain.*;
 import org.maxim.issuetracker.security.SecurityConstants;
 import org.maxim.issuetracker.service.UserService;
+import org.maxim.issuetracker.web.constants.MessageConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,7 +58,7 @@ public class UserServiceImpl implements UserService {
 
         Project project = projectDAO.findById(projectId);
         if (project == null) {
-            throw new IllegalArgumentException("You didn't choose a project.");
+            throw new IllegalArgumentException(MessageConstants.PROJECT_NOT_CHOSEN);
         }
 
         final int initialStatusPos = 0;
@@ -78,7 +79,7 @@ public class UserServiceImpl implements UserService {
     public void reportIssue(int assigmentId, String username, Activity activity) {
         Assigment assigment = assigmentDAO.findById(assigmentId);
         if (assigment == null) {
-            throw new IllegalArgumentException("Your request was modified before send.");
+            throw new IllegalArgumentException(MessageConstants.REQUEST_WAS_MODIFIED);
         }
 
         Employee user = employeeDAO.findByLogin(username);
@@ -89,7 +90,7 @@ public class UserServiceImpl implements UserService {
         userMembers.retainAll(projectMembers);
 
         if (userMembers.isEmpty()) {
-            throw new SecurityException("Sorry, you are not a member of the current project.");
+            throw new SecurityException(MessageConstants.USER_NOT_PROJECT_MEMBER);
         }
 
         Member member = userMembers.iterator().next();
@@ -107,7 +108,7 @@ public class UserServiceImpl implements UserService {
         Assigment origin = assigmentDAO.findById(assigment.getId());
         Member assignee = memberDAO.findById(assigment.getMember().getId());
         if (assignee == null) {
-            throw new IllegalArgumentException("Sorry, you didn't select a member of the project.");
+            throw new IllegalArgumentException(MessageConstants.MEMBER_NOT_CHOSEN);
         }
 
         origin.setDescription(assigment.getDescription());
@@ -192,7 +193,7 @@ public class UserServiceImpl implements UserService {
             File saveFile = new File(EnvironmentConstants.FILES_PATH + sysFilename);
             FileUtils.writeByteArrayToFile(saveFile, file.getBytes());
         } catch (IOException e) {
-            throw new IllegalArgumentException("Can't upload file.", e);
+            throw new IllegalArgumentException(MessageConstants.CANT_UPLOAD_FILE, e);
         }
     }
 

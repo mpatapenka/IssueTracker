@@ -3,6 +3,7 @@ package org.maxim.issuetracker.service.impls;
 import org.maxim.issuetracker.dao.MemberDAO;
 import org.maxim.issuetracker.domain.Member;
 import org.maxim.issuetracker.service.MemberService;
+import org.maxim.issuetracker.web.constants.MessageConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +20,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public void add(Member member) {
         if (memberDAO.isExist(member)) {
-            throw new IllegalArgumentException("Employee already working with project.");
+            throw new IllegalArgumentException(MessageConstants.EMPLOYEE_ALREADY_ASSOCIATED_WITH_PROJECT);
         }
         memberDAO.save(member);
     }

@@ -5,6 +5,7 @@ import org.maxim.issuetracker.security.SecurityConstants;
 import org.maxim.issuetracker.service.*;
 import org.maxim.issuetracker.web.constants.AttributeConstants;
 import org.maxim.issuetracker.web.constants.MappingConstants;
+import org.maxim.issuetracker.web.constants.MessageConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -79,7 +80,7 @@ public class UserController {
     @RequestMapping(value = MappingConstants.ISSUES, method = RequestMethod.POST, params = AttributeConstants.PARAM_CREATE)
     public String createIssue(@Valid Assigment assigment, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "Check your input data and try again.";
+            return MessageConstants.INVALID_FORM_DATA;
         }
         try {
             userService.addIssue(assigment);
@@ -110,7 +111,7 @@ public class UserController {
             params = {AttributeConstants.PARAM_ID, AttributeConstants.PARAM_REPORT})
     public String reportIssue(@RequestParam int id, @Valid Activity activity, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "Check your input data and try again.";
+            return MessageConstants.INVALID_FORM_DATA;
         }
         try {
             String username = SecurityContextHolder.getContext().getAuthentication().getName();

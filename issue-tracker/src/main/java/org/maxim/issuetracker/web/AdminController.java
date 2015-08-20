@@ -8,6 +8,7 @@ import org.maxim.issuetracker.security.SecurityConstants;
 import org.maxim.issuetracker.service.*;
 import org.maxim.issuetracker.web.constants.AttributeConstants;
 import org.maxim.issuetracker.web.constants.MappingConstants;
+import org.maxim.issuetracker.web.constants.MessageConstants;
 import org.maxim.issuetracker.web.util.MessageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -91,7 +92,7 @@ public class AdminController {
 
         String responseResult = AttributeConstants.SUCCESS_RESPONSE_BODY;
         if (project == null || role == null || employee == null) {
-            responseResult = "Check your input data. Some values was incorrect.";
+            responseResult = MessageConstants.INVALID_FORM_DATA;
         } else {
             member.setEmployee(employee);
             member.setRole(role);
