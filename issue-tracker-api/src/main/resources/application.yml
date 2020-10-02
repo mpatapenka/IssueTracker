@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test_db
+    username: issue-tracker-admin
+    password: secret
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    schemas: issue_tracker
