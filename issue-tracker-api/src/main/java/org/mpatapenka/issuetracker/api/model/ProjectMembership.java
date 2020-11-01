@@ -1,6 +1,5 @@
 package org.mpatapenka.issuetracker.api.model;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.time.ZonedDateTime;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -18,23 +17,20 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder(toBuilder = true)
-public class TaskActivity extends IdentifiedEntity {
+public class ProjectMembership extends IdentifiedEntity {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "task_id", nullable = false)
-    private Task task;
+    @JoinColumn(name = "employee_id", nullable = false)
+    private Employee employee;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "added_by", nullable = false)
-    private Employee addedBy;
+    @JoinColumn(name = "project_id", nullable = false)
+    private Project project;
 
     @NotNull
-    private ZonedDateTime startedAt;
-
-    @NotNull
-    private ZonedDateTime completedAt;
-
-    private String comment;
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private ProjectRole role;
 }

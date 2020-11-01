@@ -7,7 +7,6 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -19,26 +18,22 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder(toBuilder = true)
-public class Employee extends IdentifiedEntity {
-
-    @NotEmpty
-    @Size(max = 50)
-    private String firstName;
-
-    @NotEmpty
-    @Size(max = 50)
-    private String lastName;
-
-    @NotEmpty
-    @Size(max = 10)
-    private String username;
-
-    @NotEmpty
-    @Size(max = 60)
-    private String password;
+public class TaskAttachment extends IdentifiedEntity {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "position_id", nullable = false)
-    private EmployeePosition position;
+    private Task task;
+
+    @NotEmpty
+    @Size(max = 255)
+    private String fileName;
+
+    @NotNull
+    private Long fileSize;
+
+    @NotEmpty
+    @Size(max = 510)
+    private String filePath;
+
+    private String description;
 }

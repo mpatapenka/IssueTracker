@@ -5,18 +5,18 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -24,28 +24,27 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder(toBuilder = true)
-public class Task {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@SuperBuilder(toBuilder = true)
+public class Task extends IdentifiedEntity {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "project_id", nullable = false, updatable = false)
+    @JoinColumn(name = "project_id", nullable = false)
     private Project project;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "status_id", nullable = false, updatable = false)
+    @JoinColumn(name = "status_id", nullable = false)
     private TaskStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "assigned_to", updatable = false)
+    @JoinColumn(name = "assigned_to")
     private Employee assignedTo;
 
-    @NotNull
+    @NotEmpty
+    @Size(max = 100)
+    private String summary;
+
     private String description;
 
     @NotNull
@@ -54,31 +53,11 @@ public class Task {
     @NotNull
     private LocalDateTime scheduledCompleteAt;
 
-    private LocalDateTime startedAt;
+    private ZonedDateTime startedAt;
 
-    private LocalDateTime completedAt;
+    private ZonedDateTime completedAt;
 
     @OneToMany(mappedBy = "task")
     @Builder.Default
-    private Set<Attachment> attachments = new HashSet<>();
-
-
-    @Override
-    public int hashCode() {
-        return 13;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-
-        Task that = (Task) obj;
-        return Objects.equals(this.id, that.id);
-    }
+    private Set<TaskAttachment> attachments = new HashSet<>();
 }

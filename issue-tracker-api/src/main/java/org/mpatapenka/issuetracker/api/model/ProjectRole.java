@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder(toBuilder = true)
-public class TaskStatus extends IdentifiedEntity {
+public class ProjectRole extends IdentifiedEntity {
 
     @NotEmpty
     @Size(max = 15)

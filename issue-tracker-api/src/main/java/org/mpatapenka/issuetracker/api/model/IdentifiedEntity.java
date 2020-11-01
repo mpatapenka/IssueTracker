@@ -1,34 +1,28 @@
 package org.mpatapenka.issuetracker.api.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 
-@Entity
+@MappedSuperclass
 @Getter
 @Setter
+@SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder(toBuilder = true)
-public class EmployeeRole {
+public abstract class IdentifiedEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @NotNull
-    @Size(max = 15)
-    private String name;
+    private Integer id;
 
 
     @Override
@@ -46,7 +40,8 @@ public class EmployeeRole {
             return false;
         }
 
-        EmployeeRole that = (EmployeeRole) obj;
-        return Objects.equals(this.id, that.id);
+        IdentifiedEntity that = (IdentifiedEntity) obj;
+        return this.id != null && that.id != null
+                && Objects.equals(this.id, that.id);
     }
 }
