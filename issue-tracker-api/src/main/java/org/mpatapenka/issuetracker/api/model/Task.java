@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
@@ -45,6 +46,7 @@ public class Task extends IdentifiedEntity {
     @Size(max = 100)
     private String summary;
 
+    @Lob
     private String description;
 
     @NotNull

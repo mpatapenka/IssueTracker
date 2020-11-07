@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import java.time.ZonedDateTime;
 
@@ -36,5 +37,6 @@ public class TaskActivity extends IdentifiedEntity {
     @NotNull
     private ZonedDateTime completedAt;
 
+    @Lob
     private String comment;
 }

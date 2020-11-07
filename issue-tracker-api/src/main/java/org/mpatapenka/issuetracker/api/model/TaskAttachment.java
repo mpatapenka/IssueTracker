@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -35,5 +36,6 @@ public class TaskAttachment extends IdentifiedEntity {
     @Size(max = 510)
     private String filePath;
 
+    @Lob
     private String description;
 }

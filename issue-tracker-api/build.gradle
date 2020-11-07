@@ -35,6 +35,8 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 		exclude group: 'org.hamcrest', module: 'hamcrest'
 	}
+
+	testRuntimeOnly 'com.h2database:h2'
 }
 
 test {
