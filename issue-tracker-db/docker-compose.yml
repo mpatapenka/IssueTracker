@@ -1,0 +1,27 @@
+version: '3.8'
+
+
+services:
+  issue-tracker-db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - it-pgdata:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_PASSWORD: supersecret
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8085:8080
+
+
+# Create docker volume first
+# docker volume create it-pgdata
+volumes:
+  it-pgdata:
+    external: true

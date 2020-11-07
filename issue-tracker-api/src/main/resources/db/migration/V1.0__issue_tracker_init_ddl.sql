@@ -82,20 +82,25 @@ alter table employee
     add foreign key (position_id) references employee_position (id);
 
 alter table project_membership
-    add foreign key (employee_id) references employee (id),
-    add foreign key (project_id) references project (id),
+    add foreign key (employee_id) references employee (id);
+alter table project_membership
+    add foreign key (project_id) references project (id);
+alter table project_membership
     add foreign key (role_id) references project_role (id);
 
 alter table task
-    add foreign key (project_id) references project (id),
-    add foreign key (status_id) references task_status (id),
+    add foreign key (project_id) references project (id);
+alter table task
+    add foreign key (status_id) references task_status (id);
+alter table task
     add foreign key (assigned_to) references employee (id);
 
 alter table task_attachment
     add foreign key (task_id) references task (id);
 
 alter table task_activity
-    add foreign key (task_id) references task (id),
+    add foreign key (task_id) references task (id);
+alter table task_activity
     add foreign key (added_by) references employee (id);
 
 
