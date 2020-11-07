@@ -3,6 +3,7 @@ Project for learning
 
 ### Pre requisites
 - Install Java
+- Install NodeJS
 - Install Docker
 
 ### How to run
@@ -32,5 +33,6 @@ Project for learning
     ```
 - Run issue tracker UI
     ```
-    TBD
+    cd ./issue-tracker-ui
+    npm start
     ```
