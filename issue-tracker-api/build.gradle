@@ -24,6 +24,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.flywaydb:flyway-core'
 	implementation 'javax.validation:validation-api'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.4.8'
 
 	compileOnly 'org.projectlombok:lombok'
 

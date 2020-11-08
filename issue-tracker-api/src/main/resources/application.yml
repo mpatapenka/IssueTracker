@@ -1,12 +1,25 @@
+server:
+  servlet:
+    context-path: /api/v1
+
+
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/test_db
+    url: jdbc:postgresql://localhost:5432/issue_tracker_dev
     username: issue-tracker-admin
     password: secret
 
   jpa:
     hibernate:
       ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate.default_schema: "`${spring.flyway.schemas}`"
 
   flyway:
     schemas: issue_tracker
+
+
+springdoc:
+  api-docs:
+    path: /docs
