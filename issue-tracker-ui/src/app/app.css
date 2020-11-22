@@ -1,0 +1,426 @@
+html, body {
+    margin: 0;
+    min-width: 550px;
+    font-family: Arial, sans-serif;
+    background: #F5F5F5;
+    height: 100%;
+}
+
+.main {
+    min-height: 100%;
+    box-sizing: border-box;
+    padding-bottom: 44px;
+}
+
+.header {
+    background: #205081;
+    height: 41px;
+}
+
+.navigation {
+    padding: 0 40px;
+    margin: 0;
+    height: 100%;
+    font-size: 14px;
+    line-height: 41px;
+    color: #fff;
+}
+
+.navigation .menu-item {
+    display: inline-block;
+    list-style: none;
+    padding: 0 10px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.navigation .menu-item:hover {
+    background: #296CA3;
+}
+
+.navigation a {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav-link:visited {
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav-link:focus {
+    text-decoration: none;
+    color: #fff;
+}
+
+.account-button {
+    float: right;
+}
+
+.content {
+    border: 0 solid #ddd;
+    border-bottom-width: 1px;
+    background: #FFFFFF;
+}
+
+.content-header {
+    padding: 20px;
+    color: #333;
+    font-size: 24px;
+}
+
+.content-layout {
+    margin-top: -20px;
+    padding: 0 20px 20px;
+    clear: both;
+    display: block;
+}
+
+.content-layout:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.content-panel {
+    width: 47.5%;
+    min-width: 500px;
+    display: block;
+    float: left;
+    position: relative;
+    margin: 20px 0 -1.5em 2%;
+}
+
+.panel-header {
+    box-sizing: border-box;
+    color: #fff;
+    background: #3b73af;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border: 1px solid #ddd;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 0 4px 10px;
+}
+
+.panel-content {
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #333;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-top: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.button {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background: #FFFFFF;
+    cursor: pointer;
+    border-radius: 2px;
+    box-shadow: 0 0 4px #000;
+    color: #000;
+    padding: 2px 0;
+    margin: 3px;
+}
+
+.button:hover {
+    box-shadow: 0 0 1px #000;
+}
+
+.nav-button {
+    background: #3572AF;
+    color: #fff;
+    padding: 0;
+    box-shadow: none;
+    line-height: 30px;
+}
+
+.activity-item {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.project-form-item {
+    width: 100%;
+    border-radius: 4px;
+    padding: 4px 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 14px;
+    height: 40px;
+    margin: 5px 0;
+}
+
+.project-form-textarea {
+    height: 100px;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.default-form-btn {
+    font-size: 16px;
+    background: #3572b0;
+    border-color: transparent;
+    color: #fff;
+    border-radius: 3px;
+    margin: 5px 0;
+    cursor: pointer;
+    width: 100%;
+    height: 40px;
+}
+
+.alert-fix {
+    margin-bottom: 0;
+    min-height: 40px;
+    font-size: 14px;
+    line-height: 30px;
+    padding: 4px 30px 4px 10px;
+    background: #FFFFFF;
+}
+
+.alert-danger-fix {
+    border-color: #BF5B5B;
+    color: #BF5B5B;
+}
+
+.export-btn {
+    float: right;
+}
+
+.scrollable-panel-content {
+    margin: 0;
+    padding: 0;
+    max-height: 390px;
+    overflow: auto;
+}
+
+.file-upload {
+    width: 100%;
+}
+
+/*!
+ * Datepicker for Bootstrap
+ *
+ * Copyright 2012 Stefan Petre
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ */
+.datepicker {
+    z-index: 5000;
+    top: 0;
+    left: 0;
+    padding: 4px;
+    margin-top: 1px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    /*.dow {
+      border-top: 1px solid #ddd !important;
+    }*/
+
+}
+
+.datepicker:before {
+    content: '';
+    display: inline-block;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #ccc;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: -7px;
+    left: 6px;
+}
+
+.datepicker:after {
+    content: '';
+    display: inline-block;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #ffffff;
+    position: absolute;
+    top: -6px;
+    left: 7px;
+}
+
+.datepicker > div {
+    display: none;
+}
+
+.datepicker table {
+    width: 100%;
+    margin: 0;
+}
+
+.datepicker td,
+.datepicker th {
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.datepicker td.day:hover {
+    background: #eeeeee;
+    cursor: pointer;
+}
+
+.datepicker td.day.disabled {
+    color: #eeeeee;
+}
+
+.datepicker td.old,
+.datepicker td.new {
+    color: #999999;
+}
+
+.datepicker td.active,
+.datepicker td.active:hover {
+    color: #ffffff;
+    background-color: #006dcc;
+    background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
+    background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
+    background-image: -o-linear-gradient(top, #0088cc, #0044cc);
+    background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
+    border-color: #0044cc #0044cc #002a80;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #0044cc;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.datepicker td.active:hover,
+.datepicker td.active:hover:hover,
+.datepicker td.active:focus,
+.datepicker td.active:hover:focus,
+.datepicker td.active:active,
+.datepicker td.active:hover:active,
+.datepicker td.active.active,
+.datepicker td.active:hover.active,
+.datepicker td.active.disabled,
+.datepicker td.active:hover.disabled,
+.datepicker td.active[disabled],
+.datepicker td.active:hover[disabled] {
+    color: #ffffff;
+    background-color: #0044cc;
+    *background-color: #003bb3;
+}
+
+.datepicker td.active:active,
+.datepicker td.active:hover:active,
+.datepicker td.active.active,
+.datepicker td.active:hover.active {
+    background-color: #003399 \9;
+}
+
+.datepicker td span {
+    display: block;
+    width: 47px;
+    height: 54px;
+    line-height: 54px;
+    float: left;
+    margin: 2px;
+    cursor: pointer;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.datepicker td span:hover {
+    background: #eeeeee;
+}
+
+.datepicker td span.active {
+    color: #ffffff;
+    background-color: #006dcc;
+    background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
+    background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
+    background-image: -o-linear-gradient(top, #0088cc, #0044cc);
+    background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
+    border-color: #0044cc #0044cc #002a80;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #0044cc;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.datepicker td span.active:hover,
+.datepicker td span.active:focus,
+.datepicker td span.active:active,
+.datepicker td span.active.active,
+.datepicker td span.active.disabled,
+.datepicker td span.active[disabled] {
+    color: #ffffff;
+    background-color: #0044cc;
+    *background-color: #003bb3;
+}
+
+.datepicker td span.active:active,
+.datepicker td span.active.active {
+    background-color: #003399 \9;
+}
+
+.datepicker td span.old {
+    color: #999999;
+}
+
+.datepicker th.switch {
+    width: 145px;
+}
+
+.datepicker th.next,
+.datepicker th.prev {
+    font-size: 21px;
+}
+
+.datepicker thead tr:first-child th {
+    cursor: pointer;
+}
+
+.datepicker thead tr:first-child th:hover {
+    background: #eeeeee;
+}
+
+.input-append.date .add-on i,
+.input-prepend.date .add-on i {
+    display: block;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+}

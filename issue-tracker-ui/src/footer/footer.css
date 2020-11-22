@@ -1,0 +1,16 @@
+.footer-body {
+  color: #7a869a;
+  font-size: 12px;
+  line-height: 44px;
+  min-height: 44px;
+  text-align: center;
+}
+
+.footer-body a {
+  color: #7a869a;
+  text-decoration: none;
+}
+
+.footer-body a:hover {
+  text-decoration: underline;
+}
