@@ -1,4 +1,4 @@
-package org.mpatapenka.issuetracker.api.model;
+package org.mpatapenka.issuetracker.api.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

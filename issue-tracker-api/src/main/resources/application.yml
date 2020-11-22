@@ -23,3 +23,9 @@ spring:
 springdoc:
   api-docs:
     path: /docs
+
+
+logging:
+  level:
+    root: INFO
+    org.mpatapenka.issuetracker.api: DEBUG

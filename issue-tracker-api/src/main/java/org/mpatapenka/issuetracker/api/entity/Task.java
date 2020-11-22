@@ -1,4 +1,4 @@
-package org.mpatapenka.issuetracker.api.model;
+package org.mpatapenka.issuetracker.api.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -47,6 +48,7 @@ public class Task extends IdentifiedEntity {
     private String summary;
 
     @Lob
+    @Type(type = "org.hibernate.type.TextType")
     private String description;
 
     @NotNull

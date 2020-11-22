@@ -1,4 +1,4 @@
-package org.mpatapenka.issuetracker.api.model;
+package org.mpatapenka.issuetracker.api.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,4 +21,8 @@ public class ProjectRole extends IdentifiedEntity {
     @NotEmpty
     @Size(max = 15)
     private String name;
+
+    @NotEmpty
+    @Size(max = 20)
+    private String code;
 }

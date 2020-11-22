@@ -1,16 +1,17 @@
-package org.mpatapenka.issuetracker.api.model;
+package org.mpatapenka.issuetracker.api.entity;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -38,5 +39,6 @@ public class TaskActivity extends IdentifiedEntity {
     private ZonedDateTime completedAt;
 
     @Lob
+    @Type(type = "org.hibernate.type.TextType")
     private String comment;
 }

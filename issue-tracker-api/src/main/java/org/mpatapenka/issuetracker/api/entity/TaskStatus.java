@@ -1,4 +1,4 @@
-package org.mpatapenka.issuetracker.api.model;
+package org.mpatapenka.issuetracker.api.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,6 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
-import javax.persistence.Lob;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -17,12 +16,9 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder(toBuilder = true)
-public class Project extends IdentifiedEntity {
+public class TaskStatus extends IdentifiedEntity {
 
     @NotEmpty
-    @Size(max = 100)
+    @Size(max = 15)
     private String name;
-
-    @Lob
-    private String description;
 }

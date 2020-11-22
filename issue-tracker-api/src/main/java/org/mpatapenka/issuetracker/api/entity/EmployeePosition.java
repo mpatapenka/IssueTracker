@@ -1,4 +1,4 @@
-package org.mpatapenka.issuetracker.api.model;
+package org.mpatapenka.issuetracker.api.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,9 +16,9 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder(toBuilder = true)
-public class TaskStatus extends IdentifiedEntity {
+public class EmployeePosition extends IdentifiedEntity {
 
     @NotEmpty
-    @Size(max = 15)
+    @Size(max = 100)
     private String name;
 }
