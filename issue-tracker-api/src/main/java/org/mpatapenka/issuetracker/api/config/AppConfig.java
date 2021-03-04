@@ -11,8 +11,8 @@ import java.time.Clock;
 @Configuration(proxyBeanMethods = false)
 public class AppConfig {
 
-    @Bean
-    public ClockProvider clockProvider() {
-        return Clock::systemDefaultZone;
-    }
+  @Bean
+  public ClockProvider clockProvider() {
+    return Clock::systemDefaultZone;
+  }
 }

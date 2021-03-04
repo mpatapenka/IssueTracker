@@ -17,7 +17,7 @@ Project for learning
       cd ./issue-tracker-db
       docker-compose up -d
       ```
-    - During first run user ```issue-tracker-admin/secret``` and  database ```issuet_tracker_dev``` are created
+    - During first run user ```issue_tracker_admin/secret``` and  database ```issuet_tracker_dev``` are created
     - Useful docker commands
       ```
       docker-compose down                     # shutdown all services defined in docker-compose.yml

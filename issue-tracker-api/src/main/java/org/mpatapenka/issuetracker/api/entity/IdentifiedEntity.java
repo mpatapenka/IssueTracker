@@ -1,5 +1,6 @@
 package org.mpatapenka.issuetracker.api.entity;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,10 +16,10 @@ import java.util.Objects;
 @MappedSuperclass
 @Getter
 @Setter
-@SuperBuilder(toBuilder = true)
 @NoArgsConstructor
-@AllArgsConstructor
-public abstract class IdentifiedEntity {
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@SuperBuilder(toBuilder = true)
+abstract class IdentifiedEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

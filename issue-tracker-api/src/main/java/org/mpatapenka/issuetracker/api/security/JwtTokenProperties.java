@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.time.Duration;
 import java.util.UUID;
 
-@ConfigurationProperties("issue-tracker-api.auth.jwt-token")
+@ConfigurationProperties("issue-tracker.auth-jwt-token")
 @Getter
 @Setter
 public final class JwtTokenProperties {

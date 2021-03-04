@@ -1,12 +1,17 @@
-server:
-  servlet:
-    context-path: /api/v1
+issue-tracker:
+  api:
+    version: v1
+    title: Issue Tracker API
+    description: Issue Tracker sample application
+    external-docs:
+      description: Issue Tracker GitHub repo
+      url: https://github.com/mpatapenka/IssueTracker
 
 
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/issue_tracker_dev
-    username: issue-tracker-admin
+    username: issue_tracker_admin
     password: secret
 
   jpa:
@@ -21,8 +26,17 @@ spring:
 
 
 springdoc:
+  writer-with-default-pretty-printer: true
+  show-actuator: true
   api-docs:
-    path: /docs
+    path: /${issue-tracker.api.version}/api-docs
+  swagger-ui:
+    path: /${issue-tracker.api.version}/swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: method
+    disable-swagger-default-url: true
+    layout: BaseLayout
+    display-request-duration: true
 
 
 logging:

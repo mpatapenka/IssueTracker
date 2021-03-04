@@ -1,5 +1,6 @@
 package org.mpatapenka.issuetracker.api.entity;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,7 +26,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @SuperBuilder(toBuilder = true)
 public class Task extends IdentifiedEntity {
 

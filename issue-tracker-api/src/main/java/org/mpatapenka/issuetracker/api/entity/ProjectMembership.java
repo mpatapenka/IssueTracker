@@ -1,5 +1,6 @@
 package org.mpatapenka.issuetracker.api.entity;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @SuperBuilder(toBuilder = true)
 public class ProjectMembership extends IdentifiedEntity {
 

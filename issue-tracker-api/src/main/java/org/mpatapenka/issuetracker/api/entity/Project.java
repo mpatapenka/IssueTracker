@@ -1,5 +1,6 @@
 package org.mpatapenka.issuetracker.api.entity;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @SuperBuilder(toBuilder = true)
 public class Project extends IdentifiedEntity {
 

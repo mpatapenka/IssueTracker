@@ -1,5 +1,6 @@
 package org.mpatapenka.issuetracker.api.entity;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,14 +13,18 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @SuperBuilder(toBuilder = true)
 public class Employee extends IdentifiedEntity {
+
+    @NotNull
+    private UUID uuid;
 
     @NotEmpty
     @Size(max = 50)
